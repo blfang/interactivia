@@ -1,3 +1,5 @@
+import styles from './NormalPlot.module.css';
+
 const MARGIN = { top: 6, right: 6, bottom: 6, left: 6 };
 const X_MIN = -4;
 const X_MAX = 4;
@@ -62,7 +64,7 @@ export default function NormalPlot({
   const significant = zScore !== null && Math.abs(zScore) > cutoff;
 
   return (
-    <svg width={width} height={height}>
+    <svg viewBox={`0 0 ${width} ${height}`} className={styles.plot}>
       {/* red box outline when the simulated value is significant;
           rendered first so tails and curve stay visible on top */}
       {significant && (

@@ -10,7 +10,7 @@ const simpsonsParadox: Lesson = {
   id: 'simpsons-paradox',
   title: "Simpson's Paradox",
   description:
-    "Discover how to create examples of Simpson's paradox by playing a game of dragging vectors.",
+    "Discover how to create examples of Simpson's paradox by playing a game with vectors.",
   steps: [Step1, Step2, Step3, Step4, Takeaways],
   stepTitles: ["A vector game", 'Relating vectors to ratios', 'Batting averages', 'Kidney stones treatments', 'Takeaways'],
   preview: Preview,

@@ -9,7 +9,7 @@ import Preview from './components/Preview';
 const multipleTesting: Lesson = {
   id: 'multiple-testing',
   title: 'Multiple Testing',
-  description: 'Multiple Testing',
+  description: 'Simulate tests to see how running multiple tests can lead to mistaken discoveries ("green jelly beans cause acne!"), and learn one way to address this.',
   steps: [Step1, Step2, Step3, Step4, Step5],
   stepTitles: ['Finding something from nothing',
     'Finding something from a lot of nothing',

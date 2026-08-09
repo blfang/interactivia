@@ -1,3 +1,5 @@
+import styles from './MultipleTestingPlot.module.css';
+
 const MARGIN = { top: 20, right: 20, bottom: 40, left: 50 };
 const M = 40;
 const ALPHA = 0.05;
@@ -43,7 +45,7 @@ export default function MultipleTestingPlot({
   const xTicks = [10, 20, 30, 40];
 
   return (
-    <svg width={width} height={height}>
+    <svg viewBox={`0 0 ${width} ${height}`} className={styles.plot}>
       {/* Background */}
       <rect x={MARGIN.left} y={MARGIN.top} width={plotW} height={plotH} fill="#f8fafc" />
 

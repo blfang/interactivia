@@ -2,3 +2,8 @@
   display: flex;
   justify-content: center;
 }
+
+.plotContainer > * {
+  width: 100%;
+  max-width: 700px;
+}

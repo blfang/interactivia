@@ -54,7 +54,8 @@
   font-size: 1rem;
   color: #374151;
   font-variant-numeric: tabular-nums;
-  white-space: nowrap;
+  text-align: center;
+  max-width: 100%;
 }
 
 .counter--hidden {
@@ -69,4 +70,7 @@
   display: grid;
   gap: 0.5rem;
   justify-content: center;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
 }

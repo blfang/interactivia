@@ -1,11 +1,11 @@
 .hint {
-  marginBottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .buttonGrid {
-  marginBottom: 2rem;
+  margin-bottom: 2rem;
   display: grid;
-  gridTemplateColumns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
 }
 
@@ -52,22 +52,23 @@
 }
 
 .plotContainer {
-  marginTop: 2rem;
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
 }
 
 .plotWrapper {
-  maxWidth: 700px;
+  max-width: 700px;
+  width: 100%;
 }
 
 .plotTitle {
-  marginBottom: 1rem;
+  margin-bottom: 1rem;
   color: #1e293b;
   text-align: center;
-  marginTop: 2rem;
+  margin-top: 2rem;
 }
 
 .explanation {
-  marginBottom: 2rem;
+  margin-bottom: 2rem;
 }

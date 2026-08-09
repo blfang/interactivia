@@ -68,7 +68,7 @@ export default function SimulationGrid({
       </div>
       <div
         className={styles.grid}
-        style={{ gridTemplateColumns: `repeat(${columns}, auto)` }}
+        style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
       >
         {zScores.map((z, i) => (
           <NormalPlot key={i} zScore={z} width={plotWidth} height={plotHeight} cutoff={cutoff} />

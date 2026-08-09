@@ -112,8 +112,8 @@ export function PlotFrame({
   return (
     <svg
       ref={svgRef}
-      width={width}
-      height={height}
+      viewBox={`0 0 ${width} ${height}`}
+      className={styles.frame}
       style={svgStyle}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
@@ -277,49 +277,51 @@ export function ValueTable({
     p.x === 0 ? '\u2014' : `${p.y} / ${p.x} = ${(p.y / p.x).toFixed(decimals)}`;
 
   return (
-    <table className={styles.table}>
-      <thead>
-        <tr>
-          <th className={styles.th}>Group</th>
-          {columns.map((c) => (
-            <th key={c.key} className={`${styles.th} ${styles.thRight}`}>
-              <span className={styles.swap}>
-                <span className={styles.dot} style={{ background: c.color }} />
-                {c.label}
-              </span>
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((row) => {
-          const ratios = columns.map((c) => ({
-            key: c.key,
-            ratio: ratioOf(row.values[c.key]),
-          }));
-          const defined = ratios.filter((r) => r.ratio !== undefined);
-          let maxKey: string | undefined;
-          if (defined.length > 0) {
-            const maxRatio = Math.max(...defined.map((d) => d.ratio as number));
-            const winners = defined.filter((d) => d.ratio === maxRatio);
-            if (winners.length === 1) maxKey = winners[0].key;
-          }
-          return (
-            <tr key={row.group}>
-              <td className={styles.td}>{row.group}</td>
-              {columns.map((c) => {
-                const color = maxKey === c.key ? c.color : undefined;
-                return (
-                  <td key={c.key} className={`${styles.td} ${styles.tdRight}`} style={{ color }}>
-                    {formatCell(row.values[c.key])}
-                  </td>
-                );
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <div className={styles.tableContainer}>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th className={styles.th}>Group</th>
+            {columns.map((c) => (
+              <th key={c.key} className={`${styles.th} ${styles.thRight}`}>
+                <span className={styles.swap}>
+                  <span className={styles.dot} style={{ background: c.color }} />
+                  {c.label}
+                </span>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => {
+            const ratios = columns.map((c) => ({
+              key: c.key,
+              ratio: ratioOf(row.values[c.key]),
+            }));
+            const defined = ratios.filter((r) => r.ratio !== undefined);
+            let maxKey: string | undefined;
+            if (defined.length > 0) {
+              const maxRatio = Math.max(...defined.map((d) => d.ratio as number));
+              const winners = defined.filter((d) => d.ratio === maxRatio);
+              if (winners.length === 1) maxKey = winners[0].key;
+            }
+            return (
+              <tr key={row.group}>
+                <td className={styles.td}>{row.group}</td>
+                {columns.map((c) => {
+                  const color = maxKey === c.key ? c.color : undefined;
+                  return (
+                    <td key={c.key} className={`${styles.td} ${styles.tdRight}`} style={{ color }}>
+                      {formatCell(row.values[c.key])}
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
