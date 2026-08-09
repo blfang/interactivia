@@ -63,6 +63,7 @@ export default function MeanWidget({
   const [solveReached, setSolveReached] = useState(false);
   const [animating, setAnimating] = useState(false);
   const draggingRef = useRef<number>(-1);
+  const draggingPointerIdRef = useRef<number | null>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
   const onPeopleChangeRef = useRef(onPeopleChange);
   const animationRef = useRef<number | null>(null);
@@ -170,10 +171,15 @@ export default function MeanWidget({
   const handlePointerDown = (e: ReactPointerEvent<SVGSVGElement>) => {
     const svg = svgRef.current;
     if (!svg) return;
+    // Ignore a second finger/pointer while one drag is already active.
+    if (draggingPointerIdRef.current !== null) return;
     e.preventDefault();
-    svg.setPointerCapture(e.pointerId);
     const { x, y } = getSVGCoord(e);
-    draggingRef.current = findDraggableIndex(x, y);
+    const index = findDraggableIndex(x, y);
+    if (index < 0) return;
+    svg.setPointerCapture(e.pointerId);
+    draggingPointerIdRef.current = e.pointerId;
+    draggingRef.current = index;
   };
 
   const handlePointerMove = (e: ReactPointerEvent<SVGSVGElement>) => {
@@ -181,11 +187,16 @@ export default function MeanWidget({
     if (!svg) return;
     const { x, y } = getSVGCoord(e);
 
-    if (draggingRef.current >= 0) {
+    if (
+      draggingRef.current >= 0 &&
+      e.pointerId === draggingPointerIdRef.current
+    ) {
       const newValue = xToValue(x, maxValue);
+      const draggingIndex = draggingRef.current;
       setPeople((prev) => {
+        if (draggingIndex < 0 || draggingIndex >= prev.length) return prev;
         const next = [...prev];
-        const currentValue = next[draggingRef.current].value;
+        const currentValue = next[draggingIndex].value;
         let clampedValue = newValue;
         if (persistentMean && thresholdValue !== null) {
           if (currentValue < thresholdValue) {
@@ -194,8 +205,8 @@ export default function MeanWidget({
             clampedValue = Math.max(clampedValue, thresholdValue);
           }
         }
-        next[draggingRef.current] = {
-          ...next[draggingRef.current],
+        next[draggingIndex] = {
+          ...next[draggingIndex],
           value: clampedValue,
         };
         return next;
@@ -206,7 +217,9 @@ export default function MeanWidget({
     svg.style.cursor = findDraggableIndex(x, y) >= 0 ? 'grab' : 'default';
   };
 
-  const handlePointerUp = () => {
+  const handlePointerUp = (e: ReactPointerEvent<SVGSVGElement>) => {
+    if (e.pointerId !== draggingPointerIdRef.current) return;
+    draggingPointerIdRef.current = null;
     draggingRef.current = -1;
   };
 
