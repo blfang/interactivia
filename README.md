@@ -2,7 +2,7 @@
 
 Interactive activities for math intuition.
 
-https://interactivia.vercel.app/.
+https://interactivia.vercel.app/
 
 ## Lessons
 
