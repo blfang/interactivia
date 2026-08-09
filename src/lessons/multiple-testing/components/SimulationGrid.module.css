@@ -33,12 +33,7 @@
 }
 
 .button--primary {
-  background: #3b82f6;
-  transition: background 0.2s;
-}
-
-.button--primary:hover:not(:disabled) {
-  background: #2563eb;
+  composes: buttonPrimary from '../../../styles/common.module.css';
 }
 
 .button--secondary {

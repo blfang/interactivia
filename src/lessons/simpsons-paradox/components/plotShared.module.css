@@ -1,10 +1,7 @@
 .card {
+  composes: card from '../../../styles/common.module.css';
   position: relative;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.75rem;
   padding: 0.75rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   width: 100%;
   max-width: 390px;
   min-width: 0;
@@ -38,24 +35,22 @@
 }
 
 .tableContainer {
-  overflow-x: auto;
-  margin: 1.5rem 0;
+  composes: tableContainer from '../../../styles/common.module.css';
   min-width: 0;
   max-width: 100%;
 }
 
 .table {
-  border-collapse: collapse;
+  composes: tableSkeleton from '../../../styles/common.module.css';
   font-size: 0.9rem;
   width: 100%;
 }
 
 .th {
-  border-bottom: 2px solid #e2e8f0;
+  composes: thSkeleton from '../../../styles/common.module.css';
   padding: 0.5rem 0.75rem;
   text-align: left;
   color: #334155;
-  font-weight: 600;
 }
 
 .th--right {
@@ -63,9 +58,9 @@
 }
 
 .td {
-  border-bottom: 1px solid #e2e8f0;
+  composes: tdSkeleton from '../../../styles/common.module.css';
+  border-bottom: 1px solid var(--color-border);
   padding: 0.5rem 0.75rem;
-  color: #1e293b;
 }
 
 .td--right {

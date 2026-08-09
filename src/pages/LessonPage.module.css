@@ -71,14 +71,7 @@
 }
 
 .buttonPrimary {
-  border: none;
-  background: #3b82f6;
-  color: #ffffff;
-  transition: background 0.2s;
-}
-
-.buttonPrimary:hover:not(:disabled) {
-  background: #2563eb;
+  composes: buttonPrimary from '../styles/common.module.css';
 }
 
 .buttonSecondary {
