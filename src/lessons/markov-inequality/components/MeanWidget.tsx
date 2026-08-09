@@ -1,4 +1,5 @@
 import React, { useRef, useState, useMemo, useEffect } from 'react';
+import type { PointerEvent as ReactPointerEvent } from 'react';
 import styles from './MeanWidget.module.css';
 
 export interface Person {
@@ -11,7 +12,6 @@ interface MeanWidgetProps {
   people: Person[];
   target: number;
   showTarget?: boolean;
-  showTitle?: boolean;
   persistentMean?: boolean;
   maxValue?: number;
   threshold?: number | null;
@@ -49,7 +49,6 @@ export default function MeanWidget({
   people: initialPeople,
   target,
   showTarget = true,
-  showTitle = true,
   persistentMean = false,
   maxValue = 120,
   threshold,
@@ -101,7 +100,7 @@ export default function MeanWidget({
 
   // --- SVG coordinate helper ---
   const getSVGCoord = (
-    e: React.MouseEvent<SVGSVGElement>,
+    e: ReactPointerEvent<SVGSVGElement>,
   ): { x: number; y: number } => {
     const svg = svgRef.current;
     if (!svg) return { x: 0, y: 0 };
@@ -168,12 +167,16 @@ export default function MeanWidget({
   };
 
   // --- Event handlers ---
-  const handleMouseDown = (e: React.MouseEvent<SVGSVGElement>) => {
+  const handlePointerDown = (e: ReactPointerEvent<SVGSVGElement>) => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    e.preventDefault();
+    svg.setPointerCapture(e.pointerId);
     const { x, y } = getSVGCoord(e);
     draggingRef.current = findDraggableIndex(x, y);
   };
 
-  const handleMouseMove = (e: React.MouseEvent<SVGSVGElement>) => {
+  const handlePointerMove = (e: ReactPointerEvent<SVGSVGElement>) => {
     const svg = svgRef.current;
     if (!svg) return;
     const { x, y } = getSVGCoord(e);
@@ -203,7 +206,7 @@ export default function MeanWidget({
     svg.style.cursor = findDraggableIndex(x, y) >= 0 ? 'grab' : 'default';
   };
 
-  const handleMouseUp = () => {
+  const handlePointerUp = () => {
     draggingRef.current = -1;
   };
 
@@ -323,21 +326,16 @@ export default function MeanWidget({
 
   return (
     <div className={styles.card}>
-      {showTitle && (
-        <h3 className={styles.title}>
-          Money Distribution
-        </h3>
-      )}
-
       <svg
         ref={svgRef}
         xmlns="http://www.w3.org/2000/svg"
         viewBox={`0 0 ${W} ${chartH}`}
         className={styles.chart}
-        onMouseDown={interactionDisabled ? undefined : handleMouseDown}
-        onMouseMove={interactionDisabled ? undefined : handleMouseMove}
-        onMouseUp={interactionDisabled ? undefined : handleMouseUp}
-        onMouseLeave={interactionDisabled ? undefined : handleMouseUp}
+        style={{ touchAction: 'none' }}
+        onPointerDown={interactionDisabled ? undefined : handlePointerDown}
+        onPointerMove={interactionDisabled ? undefined : handlePointerMove}
+        onPointerUp={interactionDisabled ? undefined : handlePointerUp}
+        onPointerCancel={interactionDisabled ? undefined : handlePointerUp}
       >
         <defs>
           <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
