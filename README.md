@@ -1,27 +1,11 @@
-# Markov's Inequality
+# Interactivia
 
-An interactive visualization for building intuition behind Markov's inequality. Built with Vite + React + TypeScript.
+Interactive activities for math intuition.
 
-## Development
+https://interactivia.vercel.app/.
 
-```bash
-npm run dev
-```
+## Lessons
 
-Starts a local development server with hot module replacement.
-
-## Build
-
-```bash
-npm run build
-```
-
-Produces optimized static assets in the `dist` directory.
-
-## Preview
-
-```bash
-npm run preview
-```
-
-Serves the production build locally for preview.
+- **Simpson's Paradox** - Discover how to create examples of Simpson's paradox by playing a game of dragging vectors.
+- **Multiple Testing** - Explore how multiple testing leads to false discoveries and learn about the Bonferroni correction.
+- **Markov's Inequality** - Build intuition for Markov's inequality by sliding probability mass along a number line.
