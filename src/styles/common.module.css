@@ -30,3 +30,15 @@
   overflow-x: auto;
   margin: 1.5rem 0;
 }
+
+.titleLink {
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.titleLink:hover {
+  color: var(--color-primary);
+}

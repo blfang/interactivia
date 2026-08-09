@@ -31,9 +31,11 @@ export default function LessonPage({ steps, title, stepTitles }: LessonPageProps
 
   return (
     <div className={styles.container}>
-      <Link to="/" className={styles.titleLink}>
-        Interactivia
-      </Link>
+      <h1 className={styles.title}>
+        <Link to="/" className={styles.titleLink}>
+          Interactivia
+        </Link>
+      </h1>
       <p className={styles.subtitle}>
         Interactive activities for math intuition
       </p>
