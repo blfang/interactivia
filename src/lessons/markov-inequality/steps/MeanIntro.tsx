@@ -36,6 +36,7 @@ Tips:
 
 - For physical intuition, move the people such that the seesaw is balanced at $20.
 - You can also drag each person's label.
+- If you're stuck, click "Solve."
       `}</Markdown>
       <MeanWidget
         people={PEOPLE}

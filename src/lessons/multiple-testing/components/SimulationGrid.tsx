@@ -61,7 +61,7 @@ export default function SimulationGrid({
               : `${styles.counter} ${styles['counter--hidden']}`
           }
         >
-          Fraction of tests with mistaken findings:{' '}
+          Fraction of simulations with mistaken findings:{' '}
           <span className={styles.highlight}>{simulationsWithFinding}</span> / {simulations} ={' '}
           {simulations > 0 ? (simulationsWithFinding / simulations).toFixed(2) : '0.00'}
         </span>
