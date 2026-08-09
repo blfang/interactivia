@@ -1,0 +1,106 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.titleLink {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e293b;
+  text-decoration: none;
+  margin: 0 0 0.5rem;
+}
+
+.subtitle {
+  color: #64748b;
+  font-size: 1.1rem;
+  margin: 0 0 2rem;
+}
+
+.lessonTitle {
+  color: #000000;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 2rem;
+}
+
+.stepTitle {
+  color: #000000;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem;
+}
+
+.stepIndicator {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 2rem 0 1rem;
+}
+
+.stepDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  transition: background 0.2s;
+}
+
+.stepDotActive {
+  background: #3b82f6;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.button {
+  padding: 0.6rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.button:hover:not(:disabled) {
+  cursor: pointer;
+}
+
+.buttonPrimary {
+  border: none;
+  background: #3b82f6;
+  color: #ffffff;
+  transition: background 0.2s;
+}
+
+.buttonPrimary:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.buttonSecondary {
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #1e293b;
+  transition: background 0.2s;
+}
+
+.buttonSecondary:hover:not(:disabled) {
+  background: #f8fafc;
+}
+
+.buttonDisabled {
+  border: 1px solid #cbd5e1;
+  background: #f1f5f9;
+  color: #94a3b8;
+  cursor: default;
+}
+
+.stepCounter {
+  align-self: center;
+  color: #64748b;
+  font-size: 0.9rem;
+}

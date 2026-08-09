@@ -1,0 +1,41 @@
+.container {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.th {
+  padding: 0.75rem 0.5rem;
+  border-bottom: 2px solid #e2e8f0;
+  color: #475569;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.td {
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid #f1f5f9;
+  color: #1e293b;
+}
+
+.td--past {
+  background: #f8fafc;
+  color: #94a3b8;
+}
+
+.td--current {
+  background: #ffffff;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.td--future {
+  background: #ffffff;
+  color: #1e293b;
+}
