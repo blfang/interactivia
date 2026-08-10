@@ -1,14 +1,14 @@
-import { useState, useEffect, useRef } from 'react';
 import Markdown from '../../../components/Markdown';
 import Spoiler from '../../../components/Spoiler';
 import MathComponent from '../../../components/Math';
+import MultipleChoiceQuestion from '../../../components/MultipleChoiceQuestion';
 import MultipleTestingPlot from '../components/MultipleTestingPlot';
 import type { StepProps } from '../../types';
 import styles from './Step3.module.css';
 
 const CORRECT_ANSWER = '1-(1-0.05)^m';
 
-const ALL_OPTIONS = [
+const OPTIONS = [
   '0.05',
   '1 - 0.05',
   '0.05m',
@@ -16,36 +16,10 @@ const ALL_OPTIONS = [
   '1-0.05m',
   '1-(1-0.05)m',
   '1-0.05^m',
-  CORRECT_ANSWER
+  CORRECT_ANSWER,
 ];
 
-// Shuffle all options to display in random order
-const OPTIONS = [...ALL_OPTIONS].sort(() => Math.random() - 0.5);
-
 export default function Step3({ onCompleteChange }: StepProps) {
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [incorrectAnswers, setIncorrectAnswers] = useState<Set<string>>(new Set());
-  const [showPlot, setShowPlot] = useState(false);
-  const onCompleteChangeRef = useRef(onCompleteChange);
-  onCompleteChangeRef.current = onCompleteChange;
-
-  const isCorrect = selectedAnswer === CORRECT_ANSWER;
-
-  useEffect(() => {
-    onCompleteChangeRef.current?.(isCorrect);
-  }, [isCorrect]);
-
-  const handleSelect = (value: string) => {
-    if (selectedAnswer === null || selectedAnswer !== CORRECT_ANSWER) {
-      setSelectedAnswer(value);
-      if (value === CORRECT_ANSWER) {
-        setShowPlot(true);
-      } else {
-        setIncorrectAnswers(prev => new Set(prev).add(value));
-      }
-    }
-  };
-
   return (
     <>
       <Markdown>{`
@@ -59,28 +33,12 @@ When an individual test has a 5% chance of mistakenly discovering something when
         </Spoiler>
       </p>
 
-      <div className={styles.buttonGrid}>
-        {OPTIONS.map((option) => {
-          return (
-            <button
-              key={option}
-              onClick={() => handleSelect(option)}
-              disabled={selectedAnswer === CORRECT_ANSWER && selectedAnswer !== option}
-              className={`${styles.button} ${
-                selectedAnswer === CORRECT_ANSWER && option === CORRECT_ANSWER
-                  ? styles['button--correct']
-                  : incorrectAnswers.has(option)
-                  ? styles['button--incorrect']
-                  : ''
-              }`}
-            >
-              <MathComponent math={option} />
-            </button>
-          );
-        })}
-      </div>
-
-      {showPlot && (
+      <MultipleChoiceQuestion
+        options={OPTIONS}
+        correctAnswer={CORRECT_ANSWER}
+        renderOption={(option) => <MathComponent math={option} />}
+        onAnswerChange={onCompleteChange}
+      >
         <div className={styles.plotContainer}>
           <div className={styles.plotWrapper}>
             <div className={styles.explanation}>
@@ -94,7 +52,7 @@ Right! Here's the reasoning:
 If we plot this against $m$, we see the probability of at least one mistake grows very quickly: it is 72% when there are 25 tests, which matches what you may have seen in the previous example!
               `}</Markdown>
             </div>
-            
+
             <h3 className={styles.plotTitle}>
               Probability of at least one mistake vs. number of tests
             </h3>
@@ -108,7 +66,7 @@ This problem is known as **multiple testing.**
             </div>
           </div>
         </div>
-      )}
+      </MultipleChoiceQuestion>
     </>
   );
 }

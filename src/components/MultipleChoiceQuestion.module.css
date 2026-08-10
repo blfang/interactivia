@@ -1,0 +1,48 @@
+.buttonGrid {
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.button {
+  padding: 0.75rem 1rem;
+  font-size: 1.2rem;
+  text-align: left;
+  border: 2px solid;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  cursor: pointer;
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.button:hover:not(:disabled) {
+  background-color: #e5e7eb;
+}
+
+.button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.button--correct:hover:not(:disabled) {
+  background-color: #10b981;
+}
+
+.button--incorrect:hover:not(:disabled) {
+  background-color: #e5e7eb;
+}
+
+.button--correct {
+  background-color: #10b981 !important;
+  color: white !important;
+  border-color: #10b981 !important;
+}
+
+.button--incorrect {
+  background-color: #e5e7eb !important;
+  color: #9ca3af !important;
+  border-color: #d1d5db !important;
+  opacity: 0.5;
+}
