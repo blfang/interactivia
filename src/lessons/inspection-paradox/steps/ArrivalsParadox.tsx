@@ -21,15 +21,14 @@ In the simulation, we keep track of two new kinds of intervals:
       <ul>
         <li>
           Your waiting interval (between 10am and the next bus), in{' '}
-          <span style={{ color: RED, fontWeight: 'bold' }}>red</span>.
+          <span style={{ color: RED, fontWeight: 'bold' }}>red</span>. Is this 1/2 an hour?
         </li>
         <li>
           The interval between buses containing 10am, in{' '}
-          <span style={{ color: GREEN, fontWeight: 'bold' }}>green</span>.
+          <span style={{ color: GREEN, fontWeight: 'bold' }}>green</span>. How does this compare to the average 1 hour between consecutive buses?
         </li>
       </ul>
       <Markdown>{`
-Is the waiting time 1/2 an hour?
       `}</Markdown>
       <ArrivalsTimelineWidget highlightTenAm />
     </>

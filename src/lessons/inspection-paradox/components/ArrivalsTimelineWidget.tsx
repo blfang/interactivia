@@ -27,8 +27,6 @@ const MAX_SPEED = 100;
 const START_HOUR = 0;
 /** The clock hour highlighted by the "inspect at a fixed time" feature. */
 const HIGHLIGHT_HOUR = 10;
-/** How far above the blue bracket the duplicate green bracket is drawn. */
-const HIGHLIGHT_BRACKET_OFFSET = 66;
 /** How far above the blue bracket the red "10am to next arrival" bracket is drawn. */
 const RED_BRACKET_OFFSET = 33;
 
@@ -398,7 +396,7 @@ export default function ArrivalsTimelineWidget({
         {highlightTenAm && (
           <text
             x={PADDING.left}
-            y={66}
+            y={46}
             fontSize={15}
             fontWeight="bold"
             fill="#dc2626"
@@ -413,7 +411,7 @@ export default function ArrivalsTimelineWidget({
         {highlightTenAm && (
           <text
             x={PADDING.left}
-            y={46}
+            y={66}
             fontSize={15}
             fontWeight="bold"
             fill="#16a34a"
@@ -457,16 +455,26 @@ export default function ArrivalsTimelineWidget({
                     {formatClockHour(h)}
                   </text>
                   {highlightTenAm && isHighlightHour(h) && (
-                    <text
-                      x={x}
-                      y={(BRACKET_Y + AXIS_Y) / 2}
-                      fontSize={16}
-                      fill="#16a34a"
-                      textAnchor="middle"
-                      dominantBaseline="central"
-                    >
-                      ★
-                    </text>
+                    <>
+                      <line
+                        x1={x}
+                        y1={PADDING.top - 10}
+                        x2={x}
+                        y2={AXIS_Y + 4}
+                        stroke="#16a34a"
+                        strokeWidth={1.5}
+                      />
+                      <text
+                        x={x}
+                        y={(BRACKET_Y + AXIS_Y) / 2}
+                        fontSize={16}
+                        fill="#16a34a"
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                      >
+                        ★
+                      </text>
+                    </>
                   )}
                 </g>
               );
@@ -523,31 +531,31 @@ export default function ArrivalsTimelineWidget({
                     <>
                       <line
                         x1={prevX}
-                        y1={BRACKET_Y - HIGHLIGHT_BRACKET_OFFSET}
+                        y1={BRACKET_Y}
                         x2={x}
-                        y2={BRACKET_Y - HIGHLIGHT_BRACKET_OFFSET}
+                        y2={BRACKET_Y}
                         stroke="#16a34a"
                         strokeWidth={1.5}
                       />
                       <line
                         x1={prevX}
-                        y1={BRACKET_Y - HIGHLIGHT_BRACKET_OFFSET - 4}
+                        y1={BRACKET_Y - 4}
                         x2={prevX}
-                        y2={BRACKET_Y - HIGHLIGHT_BRACKET_OFFSET + 4}
+                        y2={BRACKET_Y + 4}
                         stroke="#16a34a"
                         strokeWidth={1.5}
                       />
                       <line
                         x1={x}
-                        y1={BRACKET_Y - HIGHLIGHT_BRACKET_OFFSET - 4}
+                        y1={BRACKET_Y - 4}
                         x2={x}
-                        y2={BRACKET_Y - HIGHLIGHT_BRACKET_OFFSET + 4}
+                        y2={BRACKET_Y + 4}
                         stroke="#16a34a"
                         strokeWidth={1.5}
                       />
                       <text
                         x={midX}
-                        y={BRACKET_Y - HIGHLIGHT_BRACKET_OFFSET - 8}
+                        y={labelY}
                         fontSize={11}
                         fill="#16a34a"
                         textAnchor="middle"
