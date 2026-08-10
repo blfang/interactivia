@@ -84,12 +84,9 @@ export default function LessonPage({ steps, title, stepTitles }: LessonPageProps
             Next →
           </button>
         ) : (
-          <button
-            disabled
-            className={`${styles.button} ${styles.buttonDisabled}`}
-          >
-            Finished
-          </button>
+          <Link to="/" className={`${styles.button} ${styles.buttonPrimary}`}>
+            Pick another lesson
+          </Link>
         )}
       </div>
     </div>

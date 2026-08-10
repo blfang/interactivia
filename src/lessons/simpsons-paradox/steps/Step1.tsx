@@ -4,18 +4,39 @@ import ArrowPlots from '../components/ArrowPlots';
 import styles from './Step1.module.css';
 import type { StepProps } from '../../types';
 
+const BLUE = '#3b82f6';
+const GREEN = '#10b981';
+const GRAY = '#64748b';
+
 export default function Step1({ onCompleteChange }: StepProps) {
   return (
     <>
       <Markdown>{`
 Drag the vectors in the "Group 1" and "Group 2" plots below, following these rules:
-* The vectors must stay out of the gray area.
-* In these two plots, the blue vector must be steeper than the green vector.
-
-The "combined" plot below adds the two vectors together for each color.
-
-**Goal: in the combined plot, make the sum of the green vectors steeper than the sum of the blue vectors.**
       `}</Markdown>
+      <ul>
+        <li>
+          The vectors must stay out of the{' '}
+          <span style={{ color: GRAY, fontWeight: 'bold' }}>gray</span> area.
+        </li>
+        <li>
+          In these two plots, the{' '}
+          <span style={{ color: BLUE, fontWeight: 'bold' }}>blue</span> vector
+          must be steeper than the{' '}
+          <span style={{ color: GREEN, fontWeight: 'bold' }}>green</span>{' '}
+          vector.
+        </li>
+      </ul>
+      <Markdown>{`
+The "combined" plot below adds the two vectors together for each color.
+      `}</Markdown>
+      <p>
+        <strong>
+          Goal: in the combined plot, make the sum of the{' '}
+          <span style={{ color: GREEN }}>green</span> vectors steeper than the
+          sum of the <span style={{ color: BLUE }}>blue</span> vectors.
+        </strong>
+      </p>
       <p className={styles.hint}>
         <strong>Hint:</strong>{' '}
         <Spoiler>
