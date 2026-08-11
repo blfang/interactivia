@@ -2,6 +2,7 @@ import { useState, useCallback, type ComponentType } from 'react';
 import { Link } from 'react-router-dom';
 import type { StepProps } from '../lessons/types';
 import SiteHeader from '../components/SiteHeader';
+import Footer from '../components/Footer';
 import styles from './LessonPage.module.css';
 
 interface LessonPageProps {
@@ -83,6 +84,7 @@ export default function LessonPage({ steps, title, stepTitles }: LessonPageProps
           </Link>
         )}
       </div>
+      <Footer />
     </div>
   );
 }

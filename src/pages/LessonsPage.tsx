@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { LESSONS } from '../lessons';
 import SiteHeader from '../components/SiteHeader';
+import Footer from '../components/Footer';
 import styles from './LessonsPage.module.css';
 
 export default function LessonsPage() {
@@ -34,6 +35,7 @@ export default function LessonsPage() {
           );
         })}
       </div>
+      <Footer />
     </div>
   );
 }
