@@ -98,6 +98,13 @@
   justify-content: center;
 }
 
+/* Let the combined plot sit at its natural size instead of always claiming
+   the full row width, so the table can share the row when there's room. */
+.row > .card {
+  width: auto;
+  flex: 1 1 300px;
+}
+
 .cursorGrab {
   cursor: grab;
 }
