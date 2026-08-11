@@ -23,6 +23,9 @@ const PIXELS_PER_HOUR = PLOT_W / VISIBLE_HOURS;
 const BASE_SECONDS_PER_HOUR = 1;
 const MIN_SPEED = 1;
 const MAX_SPEED = 100;
+/** Pop-in/fade-in animation durations at 1x speed; scaled down as speed increases. */
+const BASE_DOT_POP_MS = 300;
+const BASE_INTERVAL_FADE_MS = 400;
 /** Clock time at simulated hour 0. */
 const START_HOUR = 0;
 /** The clock hour highlighted by the "inspect at a fixed time" feature. */
@@ -349,6 +352,8 @@ export default function ArrivalsTimelineWidget({
   const minTick = ticks[0] ?? 0;
   const maxTick = ticks[ticks.length - 1] ?? 0;
   const labelLevels = assignLabelLevels(visibleArrivals);
+  const dotPopDurationMs = BASE_DOT_POP_MS / speed;
+  const intervalFadeDurationMs = BASE_INTERVAL_FADE_MS / speed;
 
   return (
     <div className={styles.card}>
@@ -486,7 +491,11 @@ export default function ArrivalsTimelineWidget({
               const midX = (x + prevX) / 2;
               const labelY = BRACKET_Y - 8 - labelLevels[i] * LEVEL_HEIGHT;
               return (
-                <g key={arrival.time} className={styles.intervalGroup}>
+                <g
+                  key={arrival.time}
+                  className={styles.intervalGroup}
+                  style={{ animationDuration: `${intervalFadeDurationMs}ms` }}
+                >
                   <line
                     x1={prevX}
                     y1={BRACKET_Y}
@@ -526,6 +535,7 @@ export default function ArrivalsTimelineWidget({
                     r={5}
                     fill="#2563eb"
                     className={styles.arrivalDot}
+                    style={{ animationDuration: `${dotPopDurationMs}ms` }}
                   />
                   {arrival.coversHighlightHour && (
                     <>
