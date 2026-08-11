@@ -1,0 +1,13 @@
+.title {
+  margin: 0 0 0.5rem;
+}
+
+.titleLink {
+  composes: titleLink from '../styles/common.module.css';
+}
+
+.subtitle {
+  color: #64748b;
+  font-size: 1.1rem;
+  margin: 0 0 2rem;
+}

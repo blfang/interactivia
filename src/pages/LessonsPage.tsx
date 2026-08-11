@@ -1,18 +1,12 @@
 import { Link } from 'react-router-dom';
 import { LESSONS } from '../lessons';
+import SiteHeader from '../components/SiteHeader';
 import styles from './LessonsPage.module.css';
 
 export default function LessonsPage() {
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>
-        <Link to="/" className={styles.titleLink}>
-          Interactivia
-        </Link>
-      </h1>
-      <p className={styles.subtitle}>
-        Interactive activities for math intuition
-      </p>
+      <SiteHeader />
 
       <div className={styles.lessonList}>
         {LESSONS.map((lesson) => {
