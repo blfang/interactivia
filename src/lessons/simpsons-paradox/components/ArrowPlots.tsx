@@ -131,10 +131,10 @@ function PlotView({
     if (x > 0 && !atOrigin({ x, y }) && !atOrigin(other)) {
       if (drag.color === 'blue') {
         // blue slope must be strictly greater than the green slope
-        y = Math.max(y, Math.ceil((other.y / other.x) * x) + 1);
+        y = Math.min(max, Math.max(y, Math.ceil((other.y / other.x) * x) + 1));
       } else {
         // green slope must be strictly less than the blue slope
-        y = Math.min(y, Math.floor((other.y / other.x) * x) - 1);
+        y = Math.max(0, Math.min(y, Math.floor((other.y / other.x) * x) - 1));
       }
     }
 
