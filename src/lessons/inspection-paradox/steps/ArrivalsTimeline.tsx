@@ -7,7 +7,6 @@ export default function ArrivalsTimeline() {
       <Markdown>{`
 Imagine a bus stop where buses arrive at random throughout the day.
 Each time a bus arrives, the time until the *next* bus is random, with a mean of 1 hour.
-So on average, an hour passes between arrivals, but the actual gaps vary.
 
 Watch the timeline below as it plays out. Each dot is an arrival, and the labeled bracket above it shows the length of the interval that just ended.
 

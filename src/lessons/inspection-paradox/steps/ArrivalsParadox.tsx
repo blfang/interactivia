@@ -14,17 +14,17 @@ export default function ArrivalsParadox() {
       <Markdown>{`
 What is your average waiting time until the next bus?
 
-Since there is one hour on average between consecutive buses and you arrive somewhere between them, you might think you will wait 1/2 an hour on average.
+Since there is one hour on average between consecutive buses and you arrive somewhere between them, you might think you will wait 30 minutes on average.
 
-In the simulation, we keep track of two new kinds of intervals:
+In the simulation, we keep track of two new kinds of interval lengths:
       `}</Markdown>
       <ul>
         <li>
-          Your waiting interval (between 10am and the next bus), in{' '}
-          <span style={{ color: RED, fontWeight: 'bold' }}>red</span>. Is this 1/2 an hour?
+          Your waiting time until the next bus, in{' '}
+          <span style={{ color: RED, fontWeight: 'bold' }}>red</span>. Is this 30 minutes?
         </li>
         <li>
-          The interval between buses containing 10am, in{' '}
+          The time between the bus just before and just after your arrival, in{' '}
           <span style={{ color: GREEN, fontWeight: 'bold' }}>green</span>. How does this compare to the average 1 hour between consecutive buses?
         </li>
       </ul>
