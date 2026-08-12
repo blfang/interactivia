@@ -22,10 +22,11 @@ Right! Because the large classes have far more students in them, they're more li
 Try it yourself below.
         `}</Markdown>
         <ClassSizeWidget />
-      </MultipleChoiceQuestion>
-      <Markdown>{`
+
+        <Markdown>{`
 This is the **inspection paradox**: the thing you "inspect" (a randomly chosen student, or — as we'll see next — a randomly chosen moment in time) tends to land in a larger-than-average interval or group.
       `}</Markdown>
+      </MultipleChoiceQuestion>
     </>
   );
 }
