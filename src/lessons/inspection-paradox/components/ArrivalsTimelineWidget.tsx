@@ -645,7 +645,7 @@ export default function ArrivalsTimelineWidget({
           type="range"
           min={LOG_MIN_SPEED}
           max={LOG_MAX_SPEED}
-          step={(LOG_MAX_SPEED - LOG_MIN_SPEED) / 200}
+          step="any"
           value={Math.log(speed)}
           onChange={(e) => setSpeed(Math.exp(Number(e.target.value)))}
         />
