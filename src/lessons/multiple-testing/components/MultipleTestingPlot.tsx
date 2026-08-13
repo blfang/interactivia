@@ -91,6 +91,17 @@ export default function MultipleTestingPlot({
         strokeWidth={2}
       />
 
+      {/* 5% reference line */}
+      <line
+        x1={MARGIN.left}
+        y1={toSvgY(0.05)}
+        x2={MARGIN.left + plotW}
+        y2={toSvgY(0.05)}
+        stroke="#94a3b8"
+        strokeWidth={1.5}
+        strokeDasharray="4 4"
+      />
+
       {/* Curve */}
       <polyline
         points={curvePoints.join(' ')}
