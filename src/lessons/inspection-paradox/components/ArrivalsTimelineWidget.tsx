@@ -23,6 +23,8 @@ const PIXELS_PER_HOUR = PLOT_W / VISIBLE_HOURS;
 const BASE_SECONDS_PER_HOUR = 1;
 const MIN_SPEED = 1;
 const MAX_SPEED = 100;
+const LOG_MIN_SPEED = Math.log(MIN_SPEED);
+const LOG_MAX_SPEED = Math.log(MAX_SPEED);
 /** Pop-in/fade-in animation durations at 1x speed; scaled down as speed increases. */
 const BASE_DOT_POP_MS = 300;
 const BASE_INTERVAL_FADE_MS = 400;
@@ -641,11 +643,11 @@ export default function ArrivalsTimelineWidget({
         Speed: {speed.toFixed(0)}x
         <input
           type="range"
-          min={MIN_SPEED}
-          max={MAX_SPEED}
-          step={1}
-          value={speed}
-          onChange={(e) => setSpeed(Number(e.target.value))}
+          min={LOG_MIN_SPEED}
+          max={LOG_MAX_SPEED}
+          step={(LOG_MAX_SPEED - LOG_MIN_SPEED) / 200}
+          value={Math.log(speed)}
+          onChange={(e) => setSpeed(Math.exp(Number(e.target.value)))}
         />
       </label>
     </div>
