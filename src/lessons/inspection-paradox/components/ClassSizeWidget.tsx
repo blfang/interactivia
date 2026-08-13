@@ -185,19 +185,6 @@ export default function ClassSizeWidget() {
           );
         })}
 
-        {phase !== 'idle' &&
-          selected.map((student) => (
-            <circle
-              key={`ring-${student.id}`}
-              cx={student.x}
-              cy={student.y}
-              r={R + 3}
-              fill="none"
-              stroke="#1e293b"
-              strokeWidth={2}
-            />
-          ))}
-
         {(phase === 'flying' || phase === 'done') &&
           selected.map((student, i) => {
             const start = { x: student.x, y: student.y - R - 10 };
