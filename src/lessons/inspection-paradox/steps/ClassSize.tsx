@@ -9,10 +9,10 @@ export default function ClassSize() {
   return (
     <>
       <Markdown>{`
-A school has 4 classes: two of size 50, and two of size 10. The average class size is (50+50+10+10) / 4 = 30.
+A school has 4 classes: two of size 50, and two of size 10.
 
 Suppose we survey 20 random students and ask each how big their class is, then average their 20 answers.
-Will this survey average tend to be...
+How will the survey average compare to the average class size of (50+50+10+10) / 4 = 30?
       `}</Markdown>
 
       <MultipleChoiceQuestion options={OPTIONS} correctAnswer={CORRECT_ANSWER}>
