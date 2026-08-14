@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from 'react';
+import styles from './Spoiler.module.css';
 
 interface SpoilerProps {
   children: ReactNode;
@@ -10,12 +11,7 @@ export default function Spoiler({ children }: SpoilerProps) {
   return (
     <span
       onClick={() => setRevealed(true)}
-      style={{
-        cursor: 'pointer',
-        backgroundColor: revealed ? 'transparent' : 'gray',
-        color: revealed ? 'inherit' : 'gray',
-        transition: 'background-color 0.2s',
-      }}
+      className={`${styles.spoiler} ${revealed ? styles.revealed : styles.hidden}`}
     >
       {children}
     </span>

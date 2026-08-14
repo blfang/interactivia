@@ -6,8 +6,7 @@ export default function Step5() {
   return (
     <>
       <Markdown>{`
-In general if we have $m$ tests, we can require each individual test to be mistaken only $5\\%/m$ of the time, rather than $5\\%$ of the time.
-This is known as the Bonferroni correction.
+As you just saw, requiring each individual test to be mistaken only $5\\%/m$ of the time — the Bonferroni correction — keeps the overall chance of a mistake under control.
 
 For **m independent tests**, the probability of at least one mistake with Bonferroni correction is
 $1 - (1 - 0.05/m)^m$.

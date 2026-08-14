@@ -61,7 +61,7 @@ export default function SimulationGrid({
               : `${styles.counter} ${styles['counter--hidden']}`
           }
         >
-          Fraction of simulations with mistaken findings:{' '}
+          Fraction of simulations with {numPlots > 1 ? 'at least one' : 'a'} false discovery:{' '}
           <span className={styles.highlight}>{simulationsWithFinding}</span> / {simulations} ={' '}
           {simulations > 0 ? (simulationsWithFinding / simulations).toFixed(2) : '0.00'}
         </span>

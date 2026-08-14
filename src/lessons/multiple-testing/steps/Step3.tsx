@@ -23,13 +23,15 @@ export default function Step3({ onCompleteChange }: StepProps) {
   return (
     <>
       <Markdown>{`
+Let's try to understand why so many of the previous page's simulations had false discoveires.
+
 When an individual test has a 5% chance of mistakenly discovering something when there is nothing, what is the probability of at least one mistaken discovery among **m independent tests**?
       `}</Markdown>
 
       <p className={styles.hint}>
         <strong>Hint:</strong>{' '}
         <Spoiler>
-          What is the complement of "at least one mistake?"
+          What is the complement of "at least one false discovery?"
         </Spoiler>
       </p>
 
@@ -45,9 +47,9 @@ When an individual test has a 5% chance of mistakenly discovering something when
               <Markdown>{`
 Right! Here's the reasoning:
 
-- The probability of **no mistake** in a single test is $1 - 0.05 = 0.95$.
-- For **m independent tests**, the probability of no mistakes in all tests is $(1 - 0.05)^m$.
-- The probability of **at least one mistake** is the complement: $1 - (1 - 0.05)^m$.
+- The probability of **no false discovery** in a single test is $1 - 0.05$.
+- For **m independent tests**, the probability of no false discoveries in all tests is $(1 - 0.05)^m$.
+- The probability of **at least one false discovery** is the complement: $1 - (1 - 0.05)^m$.
 
 If we plot this against $m$, we see the probability of at least one mistake grows very quickly: it is 72% when there are 25 tests, which matches what you may have seen in the previous example!
               `}</Markdown>
@@ -60,7 +62,7 @@ If we plot this against $m$, we see the probability of at least one mistake grow
             <div className={styles.explanation}>
               <Markdown>{`
 As long as you have a large number of tests,
-there is a high chance of a mistaken discovery.
+there is a high chance of a false discovery.
 This problem is known as **multiple testing.**
               `}</Markdown>
             </div>

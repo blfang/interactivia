@@ -9,7 +9,9 @@ Suppose we're testing for something that doesn't exist, like testing for bias in
 
 Suppose also that the test is designed so that chance of mistakenly discovering something ("The coin is biased!" or "Jelly beans cause acne!") is at most 5%.
 
-Click **Simulate** several times to repeatedly run the test. How often do you mistakenly discover something?
+Click **Simulate** several times to repeatedly run the test.
+A false discovery occurs when you get a value extreme enough to be in the red tails of the distribution.
+Check that in the long run, this only happens 5% of the time.
       `}</Markdown>
       <SimulationGrid numPlots={1} columns={1} plotWidth={400} plotHeight={267} />
     </>
