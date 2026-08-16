@@ -19,15 +19,8 @@ export default function Step4({ onCompleteChange }: StepProps) {
       <Markdown>{`
 To keep the overall chance of at least one mistaken finding at 5% when running $m$ tests, we need to adjust each individual test's threshold for declaring a finding.
 
-Should we **increase** or **decrease** each individual test's significance level (i.e. how easily it declares a finding)?
+Should we **increase** or **decrease** each individual test's significance level from 5%?
       `}</Markdown>
-
-      <p className={styles.hint}>
-        <strong>Hint:</strong>{' '}
-        <Spoiler>
-          Making each test easier to trigger would only make the overall problem worse.
-        </Spoiler>
-      </p>
 
       <MultipleChoiceQuestion
         options={OPTIONS}

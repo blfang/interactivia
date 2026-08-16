@@ -5,7 +5,7 @@ import styles from './CorrelatedTestingPlot.module.css';
 const MARGIN = { top: 20, right: 20, bottom: 40, left: 50 };
 const M = 40;
 const ALPHA = 0.05;
-const TRIALS = 10000;
+const TRIALS = 100000;
 
 function simulate(rho: number): { uncorrected: number[]; bonferroni: number[] } {
   const sqrtRho = Math.sqrt(rho);
@@ -182,14 +182,14 @@ export default function CorrelatedTestingPlot({
           type="range"
           min={0}
           max={1}
-          step={0.1}
+          step={0.05}
           value={rho}
           onChange={(e) => setRho(Number(e.target.value))}
           className={styles.slider}
         />
         <span className={styles.sliderLabel}>Perfectly correlated (&rho; = 1)</span>
       </div>
-      <div className={styles.rhoValue}>&rho; = {rho.toFixed(1)}</div>
+      <div className={styles.rhoValue}>&rho; = {rho.toFixed(2)}</div>
     </div>
   );
 }
