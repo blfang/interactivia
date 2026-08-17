@@ -9,7 +9,7 @@ const inspectionParadox: Lesson = {
   id: 'inspection-paradox',
   title: 'Inspection Paradox',
   description:
-    'Watch random arrivals unfold over a day and see why the interval you happen to land in tends to be longer than average.',
+    'Watch buses arrive at a bus stop throughout the day, and see why the bus you are waiting for seems to take longer to arrive.',
   steps: [ClassSize, ArrivalsTimeline, ArrivalsParadox, ExpectedLength],
   stepTitles: [
     'Class size',

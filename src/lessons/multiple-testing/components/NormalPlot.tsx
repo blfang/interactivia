@@ -1,6 +1,7 @@
 import styles from './NormalPlot.module.css';
 
-const MARGIN = { top: 6, right: 6, bottom: 6, left: 6 };
+const MARGIN = { top: 9, right: 9, bottom: 9, left: 9 };
+const BOX_INSET = 1.5; // gap between the svg edge and the significance box, so it stays clear of the plot content
 const X_MIN = -4;
 const X_MAX = 4;
 const Y_MAX = 0.45;
@@ -66,16 +67,16 @@ export default function NormalPlot({
   return (
     <svg viewBox={`0 0 ${width} ${height}`} className={styles.plot}>
       {/* red box outline when the simulated value is significant;
-          rendered first so tails and curve stay visible on top */}
+          drawn around the svg edge, outside the plot content, so it never overlaps the curve or tails */}
       {significant && (
         <rect
-          x={MARGIN.left}
-          y={MARGIN.top}
-          width={plotW}
-          height={plotH}
+          x={BOX_INSET}
+          y={BOX_INSET}
+          width={width - 2 * BOX_INSET}
+          height={height - 2 * BOX_INSET}
           fill="none"
           stroke={SIGNIFICANT_STROKE}
-          strokeWidth={4}
+          strokeWidth={3}
         />
       )}
 

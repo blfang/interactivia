@@ -8,9 +8,9 @@ import leverageInRegression from './leverage-in-regression/lesson';
 export const LESSONS: Lesson[] = [
   simpsonsParadox,
   multipleTesting,
-  markovInequality,
-  inspectionParadox,
   leverageInRegression,
+  inspectionParadox,
+  markovInequality,
 ];
 
 export function getLessonById(id: string | undefined): Lesson | undefined {
