@@ -21,11 +21,11 @@ In the simulation, we keep track of two new kinds of interval lengths:
       <ul>
         <li>
           Your waiting time until the next bus, in{' '}
-          <span style={{ color: RED, fontWeight: 'bold' }}>red</span>. Is this 30 minutes?
+          <span style={{ color: RED, fontWeight: 'bold' }}>red</span>. Was the above guess of "30 minutes on average" correct?
         </li>
         <li>
           The time between the bus just before and just after your arrival, in{' '}
-          <span style={{ color: GREEN, fontWeight: 'bold' }}>green</span>. How does this compare to the average 1 hour between consecutive buses?
+          <span style={{ color: GREEN, fontWeight: 'bold' }}>green</span>. Is the the average the same as the 1 hour average between consecutive buses?
         </li>
       </ul>
       <Markdown>{`

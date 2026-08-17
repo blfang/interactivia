@@ -13,7 +13,7 @@ Watch the timeline below as it plays out. Each dot is an arrival, and the labele
 You can choose from three distributions for the time between arrivals (each having mean 1):
 * Exponential: a common distribution used to model waiting times
 * Uniform between 0 and 2 hours.
-* An adversarial "long or short" distribution where the waiting time is either 5 hours or 12 minutes.
+* An adversarial distribution where the waiting time is either a quick 0.2 hours or a grueling 5 hours.
       `}</Markdown>
       <ArrivalsTimelineWidget />
     </>
