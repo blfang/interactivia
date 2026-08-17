@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex: 0 0 auto;
+}
+
+.slider {
+  writing-mode: vertical-lr;
+  direction: rtl;
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+.slider[type='range'] {
+  -webkit-appearance: slider-vertical;
+}
+
+.label {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  max-width: 90px;
+}

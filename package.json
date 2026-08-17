@@ -12,16 +12,20 @@
   },
   "dependencies": {
     "katex": "^0.18.1",
+    "plotly.js": "^3.7.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^10.1.0",
+    "react-plotly.js": "^4.1.0",
     "react-router-dom": "^7.18.1",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0"
   },
   "devDependencies": {
+    "@types/plotly.js": "^3.0.13",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.2.3",
+    "@types/react-plotly.js": "^2.6.4",
     "@vitejs/plugin-react": "^6.0.4",
     "typescript": "~6.0.2",
     "vite": "^8.1.5",

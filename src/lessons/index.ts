@@ -3,12 +3,14 @@ import markovInequality from './markov-inequality/lesson';
 import simpsonsParadox from './simpsons-paradox/lesson';
 import multipleTesting from './multiple-testing/lesson';
 import inspectionParadox from './inspection-paradox/lesson';
+import leverageInRegression from './leverage-in-regression/lesson';
 
 export const LESSONS: Lesson[] = [
   simpsonsParadox,
   multipleTesting,
   markovInequality,
   inspectionParadox,
+  leverageInRegression,
 ];
 
 export function getLessonById(id: string | undefined): Lesson | undefined {
