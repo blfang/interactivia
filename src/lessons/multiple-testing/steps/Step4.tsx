@@ -1,5 +1,4 @@
 import Markdown from '../../../components/Markdown';
-import Spoiler from '../../../components/Spoiler';
 import MultipleChoiceQuestion from '../../../components/MultipleChoiceQuestion';
 import SimulationGrid from '../components/SimulationGrid';
 import type { StepProps } from '../../types';

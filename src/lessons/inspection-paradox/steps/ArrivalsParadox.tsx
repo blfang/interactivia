@@ -15,8 +15,7 @@ export default function ArrivalsParadox() {
 What is your average waiting time until the next bus?
 
 Since there is one hour on average between consecutive buses and you arrive somewhere between them, you might think you will wait 30 minutes on average.
-
-In the simulation, we keep track of two new kinds of interval lengths:
+Let's see if a simulation confirms this. We now keep track of two new kinds of interval lengths:
       `}</Markdown>
       <ul>
         <li>
@@ -29,6 +28,7 @@ In the simulation, we keep track of two new kinds of interval lengths:
         </li>
       </ul>
       <Markdown>{`
+In particular, try the adversarial "long or short" distribution: which kind of interval does 10am tend to fall in?
       `}</Markdown>
       <ArrivalsTimelineWidget highlightTenAm />
     </>

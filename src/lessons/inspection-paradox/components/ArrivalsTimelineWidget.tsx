@@ -522,15 +522,17 @@ export default function ArrivalsTimelineWidget({
                     stroke="#2563eb"
                     strokeWidth={1.5}
                   />
-                  <text
-                    x={midX}
-                    y={labelY}
-                    fontSize={11}
-                    fill="#2563eb"
-                    textAnchor="middle"
-                  >
-                    {arrival.length.toFixed(2)}
-                  </text>
+                  {!highlightTenAm && (
+                    <text
+                      x={midX}
+                      y={labelY}
+                      fontSize={11}
+                      fill="#2563eb"
+                      textAnchor="middle"
+                    >
+                      {arrival.length.toFixed(2)}
+                    </text>
+                  )}
                   <circle
                     cx={x}
                     cy={AXIS_Y}

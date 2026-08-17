@@ -14,6 +14,8 @@ You can choose from three distributions for the time between arrivals (each havi
 * Exponential: a common distribution used to model waiting times
 * Uniform between 0 and 2 hours.
 * An adversarial distribution where the waiting time is either a quick 0.2 hours or a grueling 5 hours.
+
+At the top of the plot, we track of the running average of interval lengths. Check that it is close to 1 hour.
       `}</Markdown>
       <ArrivalsTimelineWidget />
     </>
