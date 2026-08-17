@@ -11,3 +11,8 @@
   --color-danger-hover: #b91c1c;
   --color-success: #10b981;
 }
+
+/* Keep inline KaTeX formulas from breaking across lines mid-expression. */
+.katex {
+  white-space: nowrap;
+}

@@ -25,7 +25,7 @@ export default function Step3({ onCompleteChange }: StepProps) {
       <Markdown>{`
 Let's try to understand why so many of the previous page's simulations had false discoveires.
 
-When an individual test has a 5% chance of mistakenly discovering something when there is nothing, what is the probability of at least one mistaken discovery among **m independent tests**?
+When an individual test has a 5% chance of a falsely discovering something (when there is nothing to discover), what is the probability of at least one mistaken discovery among **m independent tests**?
       `}</Markdown>
 
       <p className={styles.hint}>
