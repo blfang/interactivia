@@ -34,10 +34,20 @@
 .cardPreview {
   flex-shrink: 0;
   width: 200px;
+  height: 128px;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+}
+
+/* previews that render a single top-level <svg> scale to fill the card's height,
+   preserving their own aspect ratio, so thumbnails read as a consistent size;
+   previews built from several smaller svgs (e.g. a grid) are left at their natural size */
+.cardPreview > svg {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
 }
 
 @media (max-width: 600px) {

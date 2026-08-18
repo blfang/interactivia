@@ -1,7 +1,9 @@
 const W = 200;
 const H = 150;
-const PADDING = { left: 15, right: 15, top: 40, bottom: 30 };
-const AXIS_Y = H - PADDING.bottom;
+const PADDING = { left: 15, right: 15 };
+// the visible content (star/brackets/axis/labels) spans roughly AXIS_Y - 29 to AXIS_Y + 4;
+// center that block within the H-tall canvas instead of anchoring it near the bottom
+const AXIS_Y = H / 2 + 12.5;
 const BRACKET_Y = AXIS_Y - 16;
 
 const ARRIVAL_TIMES = [20, 55, 75, 130, 165].map((t) => t + PADDING.left);

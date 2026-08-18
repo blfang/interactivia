@@ -9,9 +9,9 @@ export default function Preview() {
   ];
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, auto)', gap: 4 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 48px)', gap: 4 }}>
       {zScores.map((z, i) => (
-        <NormalPlot key={i} zScore={z} width={56} height={40} />
+        <NormalPlot key={i} zScore={z} width={48} height={34} />
       ))}
     </div>
   );
