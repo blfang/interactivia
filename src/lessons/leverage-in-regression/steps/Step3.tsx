@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Markdown from '../../../components/Markdown';
 import Leverage3DPlot, { DEFAULT_CAMERA, type SceneCamera } from '../components/Leverage3DPlot';
+import PredictorCloudPlot from '../components/PredictorCloudPlot';
 import VerticalSlider from '../components/VerticalSlider';
 import { generateAnisotropicCloud3D, pointOnDiagonal } from '../regression';
 import type { StepProps } from '../../types';
@@ -15,6 +16,9 @@ const STD_ALONG_ANTIDIAGONAL = 0.8;
 const DISTANCE_FROM_MEAN = 5;
 const DIAGONAL_POINT = pointOnDiagonal(DISTANCE_FROM_MEAN, 'diagonal');
 const ANTIDIAGONAL_POINT = pointOnDiagonal(DISTANCE_FROM_MEAN, 'antidiagonal');
+
+const LOW_LEVERAGE_COLOR = '#16a34a';
+const HIGH_LEVERAGE_COLOR = '#dc2626';
 
 const XY_RANGE: [number, number] = [-10, 10];
 const Z_RANGE: [number, number] = [-15, 21];
@@ -40,9 +44,28 @@ export default function Step3({ onCompleteChange }: StepProps) {
       <Markdown>{`
 So far, leverage has tracked plain distance from the center of the predictor cloud. But that's really a special case — it only works because those clouds were **isotropic** (equally spread out in every direction).
 
-Here's a cloud that isn't: it's stretched out along the $(1, 1)$ direction, and squeezed tight along the $(1, -1)$ direction. Look at it from above (drag to rotate) and you'll see it's shaped like a tilted ellipse rather than a circle.
+Here's a cloud that isn't: it's stretched out along the $(1, 1)$ direction, and squeezed tight along the $(1, -1)$ direction. Viewed from directly above, in the $(x, y)$ plane, it's shaped like a tilted ellipse rather than a circle. The two plots below place the extra point the same Euclidean distance from the center — one out along the cloud's long axis $(1, 1)$, shown in green, one out along its short axis $(1, -1)$, shown in red:
+      `}</Markdown>
 
-Now consider two candidate extra points, **the same Euclidean distance from the center** — one out along the cloud's long axis $(1, 1)$, one out along its short axis $(1, -1)$. Drag the slider to shift each point's $z$-value away from the trend plane and compare how much leverage each one has.
+      <div className={styles.scatterRow}>
+        <PredictorCloudPlot
+          title="Same distance, along the long (1, 1) axis"
+          basePoints={basePoints}
+          extraPoint={DIAGONAL_POINT}
+          pointColor={LOW_LEVERAGE_COLOR}
+          xyRange={XY_RANGE}
+        />
+        <PredictorCloudPlot
+          title="Same distance, along the short (1, -1) axis"
+          basePoints={basePoints}
+          extraPoint={ANTIDIAGONAL_POINT}
+          pointColor={HIGH_LEVERAGE_COLOR}
+          xyRange={XY_RANGE}
+        />
+      </div>
+
+      <Markdown>{`
+Now let's see how that translates into 3D. Drag the slider to shift each point's $z$-value away from the trend plane and compare how much leverage each one has.
       `}</Markdown>
 
       <div className={styles.plotsRow}>
@@ -51,6 +74,7 @@ Now consider two candidate extra points, **the same Euclidean distance from the 
             title="Same distance, along the long (1, 1) axis"
             basePoints={basePoints}
             extraPoint={{ ...DIAGONAL_POINT, z: trueZ(DIAGONAL_POINT) + shift }}
+            pointColor={LOW_LEVERAGE_COLOR}
             xyRange={XY_RANGE}
             zRange={Z_RANGE}
             camera={camera}
@@ -60,6 +84,7 @@ Now consider two candidate extra points, **the same Euclidean distance from the 
             title="Same distance, along the short (1, -1) axis"
             basePoints={basePoints}
             extraPoint={{ ...ANTIDIAGONAL_POINT, z: trueZ(ANTIDIAGONAL_POINT) + shift }}
+            pointColor={HIGH_LEVERAGE_COLOR}
             xyRange={XY_RANGE}
             zRange={Z_RANGE}
             camera={camera}

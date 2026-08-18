@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Markdown from '../../../components/Markdown';
 import Leverage3DPlot, { DEFAULT_CAMERA, type SceneCamera } from '../components/Leverage3DPlot';
+import PredictorCloudPlot from '../components/PredictorCloudPlot';
 import VerticalSlider from '../components/VerticalSlider';
 import { generateCloud3D } from '../regression';
 import type { StepProps } from '../../types';
@@ -11,8 +12,11 @@ const TRUE_B = -0.4;
 const TRUE_C = 2;
 const CLOUD_RADIUS = 3;
 
-const LOW_LEVERAGE_POINT = { x: 0, y: 0 };
+const LOW_LEVERAGE_POINT = { x: 1.5, y: 1 };
 const HIGH_LEVERAGE_POINT = { x: 9, y: 9 };
+
+const LOW_LEVERAGE_COLOR = '#16a34a';
+const HIGH_LEVERAGE_COLOR = '#dc2626';
 
 const XY_RANGE: [number, number] = [-10, 10];
 const Z_RANGE: [number, number] = [-15, 20];
@@ -36,7 +40,28 @@ export default function Step2({ onCompleteChange }: StepProps) {
       <Markdown>{`
 Leverage isn't just a 1D idea — it generalizes to any number of predictors. Here, points are drawn from an isotropic cloud around $(x, y) = (0, 0)$, with $z = ax + by + c + \\text{noise}$.
 
-As before, we add one extra point (in orange) to two identical copies of the cloud, starting out exactly on the trend plane: one where it sits near the center $(0, 0)$, and one where it sits far away. Drag the slider to shift its $z$-value up or down (by the same amount in both plots), and watch the fitted plane $\\hat{z} = \\hat{a}x + \\hat{b}y + \\hat{c}$ tilt. You can also drag either plot to rotate it — both plots stay in sync, so you can compare them from any angle.
+Here's the $(x, y)$ predictor cloud viewed from directly above, with the extra point placed near (but not exactly at) the center in the first plot, shown in green, and far from it in the second, shown in red:
+      `}</Markdown>
+
+      <div className={styles.scatterRow}>
+        <PredictorCloudPlot
+          title="Extra point near the cloud's center"
+          basePoints={basePoints}
+          extraPoint={LOW_LEVERAGE_POINT}
+          pointColor={LOW_LEVERAGE_COLOR}
+          xyRange={XY_RANGE}
+        />
+        <PredictorCloudPlot
+          title="Extra point far from the cloud's center"
+          basePoints={basePoints}
+          extraPoint={HIGH_LEVERAGE_POINT}
+          pointColor={HIGH_LEVERAGE_COLOR}
+          xyRange={XY_RANGE}
+        />
+      </div>
+
+      <Markdown>{`
+Now let's see how that translates into 3D. We add this same extra point to two identical copies of the cloud, starting out exactly on the trend plane. Drag the slider to shift its $z$-value up or down (by the same amount in both plots), and watch the fitted plane $\\hat{z} = \\hat{a}x + \\hat{b}y + \\hat{c}$ tilt. You can also drag either plot to rotate it — both plots stay in sync, so you can compare them from any angle.
       `}</Markdown>
 
       <div className={styles.plotsRow}>
@@ -45,6 +70,7 @@ As before, we add one extra point (in orange) to two identical copies of the clo
             title="Extra point near the cloud's center"
             basePoints={basePoints}
             extraPoint={{ ...LOW_LEVERAGE_POINT, z: trueZ(LOW_LEVERAGE_POINT) + shift }}
+            pointColor={LOW_LEVERAGE_COLOR}
             xyRange={XY_RANGE}
             zRange={Z_RANGE}
             camera={camera}
@@ -54,6 +80,7 @@ As before, we add one extra point (in orange) to two identical copies of the clo
             title="Extra point far from the cloud's center"
             basePoints={basePoints}
             extraPoint={{ ...HIGH_LEVERAGE_POINT, z: trueZ(HIGH_LEVERAGE_POINT) + shift }}
+            pointColor={HIGH_LEVERAGE_COLOR}
             xyRange={XY_RANGE}
             zRange={Z_RANGE}
             camera={camera}

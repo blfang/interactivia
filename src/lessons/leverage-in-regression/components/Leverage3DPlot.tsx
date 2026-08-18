@@ -4,7 +4,6 @@ import { fitPlaneRegression, type Point3D } from '../regression';
 import styles from './LeverageScatterPlot.module.css';
 
 const BLUE = '#2563eb';
-const ORANGE = '#ea580c';
 
 const GRID_N = 12;
 
@@ -15,6 +14,7 @@ export const DEFAULT_CAMERA: SceneCamera = { eye: { x: 1.6, y: -1.6, z: 1.1 } };
 interface Leverage3DPlotProps {
   basePoints: Point3D[];
   extraPoint: Point3D;
+  pointColor: string;
   title: string;
   xyRange: [number, number];
   zRange: [number, number];
@@ -25,6 +25,7 @@ interface Leverage3DPlotProps {
 export default function Leverage3DPlot({
   basePoints,
   extraPoint,
+  pointColor,
   title,
   xyRange,
   zRange,
@@ -66,7 +67,7 @@ export default function Leverage3DPlot({
       x: [extraPoint.x],
       y: [extraPoint.y],
       z: [extraPoint.z],
-      marker: { color: ORANGE, size: 7, line: { color: '#ffffff', width: 1 } },
+      marker: { color: pointColor, size: 7, line: { color: '#ffffff', width: 1 } },
       hoverinfo: 'skip',
     },
   ];

@@ -1,3 +1,13 @@
+.scatterRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .plotsRow {
   display: flex;
   align-items: center;

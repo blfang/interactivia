@@ -1,32 +1,21 @@
 import Plot from 'react-plotly.js';
 import type { Data, Layout } from 'plotly.js';
-import { fitSimpleLinearRegression, type Point2D } from '../regression';
+import type { Point2D } from '../regression';
 import styles from './LeverageScatterPlot.module.css';
 
 const BLUE = '#2563eb';
-const GRAY = '#64748b';
 
-interface LeverageScatterPlotProps {
+interface PredictorCloudPlotProps {
   basePoints: Point2D[];
   extraPoint: Point2D;
   pointColor: string;
   title: string;
-  xRange: [number, number];
-  yRange: [number, number];
+  xyRange: [number, number];
 }
 
-export default function LeverageScatterPlot({
-  basePoints,
-  extraPoint,
-  pointColor,
-  title,
-  xRange,
-  yRange,
-}: LeverageScatterPlotProps) {
-  const { slope, intercept } = fitSimpleLinearRegression([...basePoints, extraPoint]);
-  const lineX = xRange;
-  const lineY: [number, number] = [slope * lineX[0] + intercept, slope * lineX[1] + intercept];
-
+// a plain top-down (x, y) scatter of the predictor cloud, with no fitted line —
+// used to show where a point sits in predictor space before jumping into the 3D fit
+export default function PredictorCloudPlot({ basePoints, extraPoint, pointColor, title, xyRange }: PredictorCloudPlotProps) {
   const data: Data[] = [
     {
       type: 'scatter',
@@ -34,16 +23,6 @@ export default function LeverageScatterPlot({
       x: basePoints.map((p) => p.x),
       y: basePoints.map((p) => p.y),
       marker: { color: BLUE, size: 7, opacity: 0.7 },
-      name: 'Data',
-      hoverinfo: 'skip',
-    },
-    {
-      type: 'scatter',
-      mode: 'lines',
-      x: lineX,
-      y: lineY,
-      line: { color: GRAY, width: 3 },
-      name: 'Fitted line',
       hoverinfo: 'skip',
     },
     {
@@ -52,7 +31,6 @@ export default function LeverageScatterPlot({
       x: [extraPoint.x],
       y: [extraPoint.y],
       marker: { color: pointColor, size: 13, line: { color: '#ffffff', width: 1.5 } },
-      name: 'Special point',
       hoverinfo: 'skip',
     },
   ];
@@ -60,8 +38,8 @@ export default function LeverageScatterPlot({
   const layout: Partial<Layout> = {
     autosize: true,
     margin: { l: 40, r: 20, t: 10, b: 40 },
-    xaxis: { range: xRange, zeroline: false, gridcolor: '#e2e8f0' },
-    yaxis: { range: yRange, zeroline: false, gridcolor: '#e2e8f0' },
+    xaxis: { range: xyRange, zeroline: false, gridcolor: '#e2e8f0', title: { text: 'x' } },
+    yaxis: { range: xyRange, zeroline: false, gridcolor: '#e2e8f0', title: { text: 'y' }, scaleanchor: 'x' },
     paper_bgcolor: 'transparent',
     plot_bgcolor: 'transparent',
     showlegend: false,

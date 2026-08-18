@@ -11,8 +11,11 @@ const TRUE_INTERCEPT = 1;
 const CLOUD_X_RANGE: [number, number] = [0, 8];
 const MEAN_X = (CLOUD_X_RANGE[0] + CLOUD_X_RANGE[1]) / 2;
 
-const LOW_LEVERAGE_X = MEAN_X;
+const LOW_LEVERAGE_X = MEAN_X + 1.5;
 const HIGH_LEVERAGE_X = 13;
+
+const LOW_LEVERAGE_COLOR = '#16a34a';
+const HIGH_LEVERAGE_COLOR = '#dc2626';
 
 const PLOT_X_RANGE: [number, number] = [-1, 14];
 const PLOT_Y_RANGE: [number, number] = [-8, 20];
@@ -35,7 +38,7 @@ export default function Step1({ onCompleteChange }: StepProps) {
       <Markdown>{`
 Here's a cloud of points roughly following a line, $y = ax + b + \\text{noise}$. Suppose we add one more point, and we get to choose how far its $y$-value strays from the trend.
 
-Below, that extra point (in orange) is added to **two identical copies** of the cloud, starting out exactly on the trend line. In the top plot, it sits near the mean of the other $x$-values. In the bottom plot, it sits far out on the $x$-axis. Drag the slider to shift the extra point's $y$-value up or down (by the same amount in both plots), and watch what happens to the fitted line, $\\hat{y} = \\hat{a}x + \\hat{b}$.
+Below, that extra point is added to **two identical copies** of the cloud, starting out exactly on the trend line. In the top plot, it sits near (but not exactly at) the mean of the other $x$-values, shown in green. In the bottom plot, it sits far out on the $x$-axis, shown in red. Drag the slider to shift the extra point's $y$-value up or down (by the same amount in both plots), and watch what happens to the fitted line, $\\hat{y} = \\hat{a}x + \\hat{b}$.
       `}</Markdown>
 
       <div className={styles.plotsRow}>
@@ -44,6 +47,7 @@ Below, that extra point (in orange) is added to **two identical copies** of the 
             title="Extra point near the mean of x"
             basePoints={basePoints}
             extraPoint={{ x: LOW_LEVERAGE_X, y: trueY(LOW_LEVERAGE_X) + shift }}
+            pointColor={LOW_LEVERAGE_COLOR}
             xRange={PLOT_X_RANGE}
             yRange={PLOT_Y_RANGE}
           />
@@ -51,6 +55,7 @@ Below, that extra point (in orange) is added to **two identical copies** of the 
             title="Extra point far from the mean of x"
             basePoints={basePoints}
             extraPoint={{ x: HIGH_LEVERAGE_X, y: trueY(HIGH_LEVERAGE_X) + shift }}
+            pointColor={HIGH_LEVERAGE_COLOR}
             xRange={PLOT_X_RANGE}
             yRange={PLOT_Y_RANGE}
           />
