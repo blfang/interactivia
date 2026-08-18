@@ -29,6 +29,7 @@ export default function LessonPage({ steps, title, stepTitles }: LessonPageProps
     setHasReported(false);
     setIsComplete(false);
     setStep(newStep);
+    window.scrollTo(0, 0);
   };
 
   return (

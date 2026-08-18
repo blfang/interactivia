@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate, useParams, Link } from 'react-router-dom';
 import LessonsPage from './pages/LessonsPage';
 import LessonPage from './pages/LessonPage';
+import ScrollToTop from './components/ScrollToTop';
 import { getLessonById } from './lessons';
 
 function LessonPageRoute() {
@@ -30,10 +31,13 @@ function LessonPageRoute() {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<LessonsPage />} />
-      <Route path="/lessons/:lessonId" element={<LessonPageRoute />} />
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<LessonsPage />} />
+        <Route path="/lessons/:lessonId" element={<LessonPageRoute />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </>
   );
 }
