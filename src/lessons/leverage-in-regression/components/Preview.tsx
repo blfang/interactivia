@@ -4,13 +4,13 @@ const MARGIN = 10;
 
 // fixed points: a small cloud plus one high-leverage outlier pulling the line
 const POINTS = [
-  { x: 0.1, y: 0.3 }, { x: 0.9, y: 0.6 }, { x: 1.4, y: 0.55 }, { x: 2.0, y: 0.8 },
-  { x: 2.3, y: 0.7 }, { x: 2.9, y: 1.0 }, { x: 3.3, y: 0.85 }, { x: 3.8, y: 1.15 },
+  { x: 0.1, y: 0.15 }, { x: 0.9, y: 0.95 }, { x: 1.4, y: 1.5 }, { x: 2.0, y: 1.7 },
+  { x: 2.3, y: 2.2 }, { x: 2.9, y: 2.6 }, { x: 3.3, y: 2.85 }, { x: 3.8, y: 3.6 },
 ];
-const OUTLIER = { x: 8.5, y: 3.6 };
+const OUTLIER = { x: 6.0, y: 3.0 };
 
 const X_MIN = 0;
-const X_MAX = 9;
+const X_MAX = 7;
 const Y_MIN = 0;
 const Y_MAX = 4;
 
