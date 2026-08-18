@@ -40,15 +40,26 @@ As before, we add one extra point (in orange) to two identical copies of the clo
       `}</Markdown>
 
       <div className={styles.plotsRow}>
-        <Leverage3DPlot
-          title="Extra point near the cloud's center"
-          basePoints={basePoints}
-          extraPoint={{ ...LOW_LEVERAGE_POINT, z: trueZ(LOW_LEVERAGE_POINT) + shift }}
-          xyRange={XY_RANGE}
-          zRange={Z_RANGE}
-          camera={camera}
-          onCameraChange={setCamera}
-        />
+        <div className={styles.plotsStack}>
+          <Leverage3DPlot
+            title="Extra point near the cloud's center"
+            basePoints={basePoints}
+            extraPoint={{ ...LOW_LEVERAGE_POINT, z: trueZ(LOW_LEVERAGE_POINT) + shift }}
+            xyRange={XY_RANGE}
+            zRange={Z_RANGE}
+            camera={camera}
+            onCameraChange={setCamera}
+          />
+          <Leverage3DPlot
+            title="Extra point far from the cloud's center"
+            basePoints={basePoints}
+            extraPoint={{ ...HIGH_LEVERAGE_POINT, z: trueZ(HIGH_LEVERAGE_POINT) + shift }}
+            xyRange={XY_RANGE}
+            zRange={Z_RANGE}
+            camera={camera}
+            onCameraChange={setCamera}
+          />
+        </div>
         <VerticalSlider
           min={SLIDER_MIN}
           max={SLIDER_MAX}
@@ -60,19 +71,10 @@ As before, we add one extra point (in orange) to two identical copies of the clo
           }}
           label="Shift extra point's z value"
         />
-        <Leverage3DPlot
-          title="Extra point far from the cloud's center"
-          basePoints={basePoints}
-          extraPoint={{ ...HIGH_LEVERAGE_POINT, z: trueZ(HIGH_LEVERAGE_POINT) + shift }}
-          xyRange={XY_RANGE}
-          zRange={Z_RANGE}
-          camera={camera}
-          onCameraChange={setCamera}
-        />
       </div>
 
       <p className={styles.note}>
-        The plane on the left barely tilts as you move the slider. The plane on the right pivots dramatically around the rest of the cloud, since the far-out point has much more leverage.
+        The top plane barely tilts as you move the slider. The bottom plane pivots dramatically around the rest of the cloud, since the far-out point has much more leverage.
       </p>
 
       <Markdown>{`

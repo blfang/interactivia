@@ -46,15 +46,26 @@ Now consider two candidate extra points, **the same Euclidean distance from the 
       `}</Markdown>
 
       <div className={styles.plotsRow}>
-        <Leverage3DPlot
-          title="Same distance, along the long (1, 1) axis"
-          basePoints={basePoints}
-          extraPoint={{ ...DIAGONAL_POINT, z: trueZ(DIAGONAL_POINT) + shift }}
-          xyRange={XY_RANGE}
-          zRange={Z_RANGE}
-          camera={camera}
-          onCameraChange={setCamera}
-        />
+        <div className={styles.plotsStack}>
+          <Leverage3DPlot
+            title="Same distance, along the long (1, 1) axis"
+            basePoints={basePoints}
+            extraPoint={{ ...DIAGONAL_POINT, z: trueZ(DIAGONAL_POINT) + shift }}
+            xyRange={XY_RANGE}
+            zRange={Z_RANGE}
+            camera={camera}
+            onCameraChange={setCamera}
+          />
+          <Leverage3DPlot
+            title="Same distance, along the short (1, -1) axis"
+            basePoints={basePoints}
+            extraPoint={{ ...ANTIDIAGONAL_POINT, z: trueZ(ANTIDIAGONAL_POINT) + shift }}
+            xyRange={XY_RANGE}
+            zRange={Z_RANGE}
+            camera={camera}
+            onCameraChange={setCamera}
+          />
+        </div>
         <VerticalSlider
           min={SLIDER_MIN}
           max={SLIDER_MAX}
@@ -66,19 +77,10 @@ Now consider two candidate extra points, **the same Euclidean distance from the 
           }}
           label="Shift extra point's z value"
         />
-        <Leverage3DPlot
-          title="Same distance, along the short (1, -1) axis"
-          basePoints={basePoints}
-          extraPoint={{ ...ANTIDIAGONAL_POINT, z: trueZ(ANTIDIAGONAL_POINT) + shift }}
-          xyRange={XY_RANGE}
-          zRange={Z_RANGE}
-          camera={camera}
-          onCameraChange={setCamera}
-        />
       </div>
 
       <p className={styles.note}>
-        Both extra points sit exactly {DISTANCE_FROM_MEAN} units from the center. Yet the plane on the right tilts far more than the plane on the left as you move the slider.
+        Both extra points sit exactly {DISTANCE_FROM_MEAN} units from the center. Yet the bottom plane tilts far more than the top plane as you move the slider.
       </p>
 
       <Markdown>{`

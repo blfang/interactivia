@@ -7,16 +7,14 @@ interface VerticalSliderProps {
   value: number;
   onChange: (value: number) => void;
   label: string;
-  height?: number;
 }
 
-export default function VerticalSlider({ min, max, step, value, onChange, label, height = 220 }: VerticalSliderProps) {
+export default function VerticalSlider({ min, max, step, value, onChange, label }: VerticalSliderProps) {
   return (
-    <div className={styles.container} style={{ height }}>
+    <div className={styles.container}>
       <input
         type="range"
         className={styles.slider}
-        style={{ width: height }}
         min={min}
         max={max}
         step={step}

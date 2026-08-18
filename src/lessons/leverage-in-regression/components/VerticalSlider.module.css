@@ -5,6 +5,7 @@
   justify-content: space-between;
   gap: 0.5rem;
   flex: 0 0 auto;
+  height: clamp(140px, 32vh, 320px);
 }
 
 .slider {
@@ -12,6 +13,8 @@
   direction: rtl;
   accent-color: #2563eb;
   cursor: pointer;
+  width: 20px;
+  height: clamp(140px, 32vh, 320px);
 }
 
 .slider[type='range'] {
