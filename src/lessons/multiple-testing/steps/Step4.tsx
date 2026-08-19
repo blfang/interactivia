@@ -30,7 +30,7 @@ Should we **increase** or **decrease** each individual test's significance level
           <Markdown>{`
 Right! We need to make each individual test **more stringent**, so that it declares a finding only for more extreme values than before.
 
-A natural way to do this: split the 5% budget evenly across the $m$ tests, giving each one a threshold of $0.05/m$. This is the **Bonferroni correction**.
+One way to do this is to split the 5% "budget" evenly across the $m$ tests, giving each one a threshold of $0.05/m$. This is the **Bonferroni correction**.
 
 For $m=25$ tests, that's $0.05/25=0.002=0.2\\%$: the test will only declare a finding when it encounters very extreme values.
 
