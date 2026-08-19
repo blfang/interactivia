@@ -1,6 +1,7 @@
 import Markdown from '../../../components/Markdown';
 import MultipleTestingPlot from '../components/MultipleTestingPlot';
 import styles from './Step5.module.css';
+import { COLOR_PRIMARY, COLOR_SUCCESS } from '../../../styles/colors';
 
 export default function Step5() {
   return (
@@ -12,9 +13,13 @@ For **m independent tests**, the probability of at least one mistake with Bonfer
 $1 - (1 - 0.05/m)^m$.
 
 Compare this to the uncorrected probability: $1 - (1 - 0.05)^m$.
-
-Notice how the Bonferroni-corrected curve (green) stays below 0.05 even as the number of tests increases, while the uncorrected curve (blue) rises quickly toward 1.
       `}</Markdown>
+      <p>
+        Notice how the Bonferroni-corrected curve (
+        <span style={{ color: COLOR_SUCCESS, fontWeight: 'bold' }}>green</span>) stays below 0.05 even as
+        the number of tests increases, while the uncorrected curve (
+        <span style={{ color: COLOR_PRIMARY, fontWeight: 'bold' }}>blue</span>) rises quickly toward 1.
+      </p>
       <div className={styles.plotContainer}>
         <MultipleTestingPlot width={600} height={400} showSecondCurve={true} showPoints={false} />
       </div>
