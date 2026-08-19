@@ -45,7 +45,7 @@ export default function Preview() {
       {POINTS.map((p, i) => (
         <circle key={i} cx={toSvgX(p.x)} cy={toSvgY(p.y)} r={2.5} fill="#2563eb" fillOpacity={0.8} />
       ))}
-      <circle cx={toSvgX(OUTLIER.x)} cy={toSvgY(OUTLIER.y)} r={4} fill="#ea580c" />
+      <circle cx={toSvgX(OUTLIER.x)} cy={toSvgY(OUTLIER.y)} r={2.5} fill="#ea580c" />
     </svg>
   );
 }
