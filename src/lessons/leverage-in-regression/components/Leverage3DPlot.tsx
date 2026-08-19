@@ -67,7 +67,7 @@ export default function Leverage3DPlot({
       x: [extraPoint.x],
       y: [extraPoint.y],
       z: [extraPoint.z],
-      marker: { color: pointColor, size: 7, line: { color: '#ffffff', width: 1 } },
+      marker: { color: pointColor, size: 4 },
       hoverinfo: 'skip',
     },
   ];

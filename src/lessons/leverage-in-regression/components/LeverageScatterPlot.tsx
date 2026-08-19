@@ -51,7 +51,7 @@ export default function LeverageScatterPlot({
       mode: 'markers',
       x: [extraPoint.x],
       y: [extraPoint.y],
-      marker: { color: pointColor, size: 13, line: { color: '#ffffff', width: 1.5 } },
+      marker: { color: pointColor, size: 7 },
       name: 'Special point',
       hoverinfo: 'skip',
     },
