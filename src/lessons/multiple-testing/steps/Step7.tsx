@@ -8,11 +8,9 @@ export default function Step7() {
   return (
     <>
       <Markdown>{`
-In the previous plot, the Bonferroni-corrected curve stayed at or below 5% no matter how correlated the tests were — even when every test was driven by the same underlying random variable. Why does the correction hold up so well, when the exact formula $1-(1-0.05)^m$ only applies to **independent** tests?
+It turns out Bonferroni works because of the **union bound**.
 
-It turns out Bonferroni works for a reason that has nothing to do with independence: the **union bound**.
-
-For *any* events $A_1, \\dots, A_m$ — independent, dependent, anything —
+For *any* events $A_1, \\dots, A_m$ (can be independent or dependent),
 
 $$P(A_1 \\cup A_2 \\cup \\dots \\cup A_m) \\le P(A_1) + P(A_2) + \\dots + P(A_m).$$
       `}</Markdown>
