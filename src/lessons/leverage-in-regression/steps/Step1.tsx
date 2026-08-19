@@ -5,6 +5,7 @@ import VerticalSlider from '../components/VerticalSlider';
 import { generateCloud2D } from '../regression';
 import type { StepProps } from '../../types';
 import styles from './Step1.module.css';
+import { COLOR_SUCCESS, COLOR_DANGER } from '../../../styles/colors';
 
 const TRUE_SLOPE = 0.6;
 const TRUE_INTERCEPT = 1;
@@ -14,8 +15,8 @@ const MEAN_X = (CLOUD_X_RANGE[0] + CLOUD_X_RANGE[1]) / 2;
 const LOW_LEVERAGE_X = MEAN_X + 1.5;
 const HIGH_LEVERAGE_X = 13;
 
-const LOW_LEVERAGE_COLOR = '#16a34a';
-const HIGH_LEVERAGE_COLOR = '#dc2626';
+const LOW_LEVERAGE_COLOR = COLOR_SUCCESS;
+const HIGH_LEVERAGE_COLOR = COLOR_DANGER;
 
 const PLOT_X_RANGE: [number, number] = [-1, 14];
 const PLOT_Y_RANGE: [number, number] = [-8, 20];

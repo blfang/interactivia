@@ -1,7 +1,5 @@
 import { PlotFrame, makeScale, type Point } from './plotShared';
-
-const BLUE = '#3b82f6';
-const GREEN = '#10b981';
+import { COLOR_PRIMARY as BLUE, COLOR_SUCCESS as GREEN } from '../../../styles/colors';
 
 const SIZE = 200;
 const MARGIN = { top: 8, right: 8, bottom: 8, left: 8 };

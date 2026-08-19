@@ -1,9 +1,7 @@
 import Markdown from '../../../components/Markdown';
 import ArrowPlots from '../components/ArrowPlots';
 import type { StepProps } from '../../types';
-
-const BLUE = '#3b82f6';
-const GREEN = '#10b981';
+import { COLOR_PRIMARY as BLUE, COLOR_SUCCESS as GREEN } from '../../../styles/colors';
 
 export default function Step2({ onCompleteChange }: StepProps) {
   return (

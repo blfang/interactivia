@@ -1,7 +1,5 @@
 import { ScenarioPlot, type ScenarioConfig } from './ScenarioPlot';
-
-const BLUE = '#3b82f6';
-const GREEN = '#10b981';
+import { COLOR_PRIMARY as BLUE, COLOR_SUCCESS as GREEN } from '../../../styles/colors';
 
 const SIZE_X = 360;
 const SIZE_Y = 300;

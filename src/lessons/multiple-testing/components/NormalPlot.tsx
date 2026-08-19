@@ -1,4 +1,5 @@
 import styles from './NormalPlot.module.css';
+import { COLOR_DANGER } from '../../../styles/colors';
 
 const MARGIN = { top: 9, right: 9, bottom: 9, left: 9 };
 const BOX_INSET = 1.5; // gap between the svg edge and the significance box, so it stays clear of the plot content
@@ -7,7 +8,7 @@ const X_MAX = 4;
 const Y_MAX = 0.45;
 const DEFAULT_CUTOFF = 1.96;
 const TAIL_FILL = '#fecaca'; // light red (tail areas under the curve)
-const SIGNIFICANT_STROKE = '#ef4444'; // red box border for significant plots
+const SIGNIFICANT_STROKE = COLOR_DANGER; // red box border for significant plots
 
 // sample the standard normal pdf f(x) = (1/sqrt(2*pi)) * exp(-x^2/2)
 const pdf = (x: number) => Math.exp((-x * x) / 2) / Math.sqrt(2 * Math.PI);

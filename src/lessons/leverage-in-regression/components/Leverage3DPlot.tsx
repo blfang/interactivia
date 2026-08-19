@@ -2,8 +2,7 @@ import Plot from 'react-plotly.js';
 import type { Data, Layout } from 'plotly.js';
 import { fitPlaneRegression, type Point3D } from '../regression';
 import styles from './LeverageScatterPlot.module.css';
-
-const BLUE = '#2563eb';
+import { COLOR_PRIMARY as BLUE } from '../../../styles/colors';
 
 const GRID_N = 12;
 

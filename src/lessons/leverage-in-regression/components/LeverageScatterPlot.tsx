@@ -2,9 +2,7 @@ import Plot from 'react-plotly.js';
 import type { Data, Layout } from 'plotly.js';
 import { fitSimpleLinearRegression, type Point2D } from '../regression';
 import styles from './LeverageScatterPlot.module.css';
-
-const BLUE = '#2563eb';
-const GRAY = '#64748b';
+import { COLOR_PRIMARY as BLUE, COLOR_TEXT_MUTED as GRAY } from '../../../styles/colors';
 
 interface LeverageScatterPlotProps {
   basePoints: Point2D[];

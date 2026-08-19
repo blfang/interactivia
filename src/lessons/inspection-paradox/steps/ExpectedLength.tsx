@@ -4,9 +4,7 @@ import MathComponent from '../../../components/Math';
 import DragBlank, { type DragBlankOption } from '../components/DragBlank';
 import type { StepProps } from '../../types';
 import styles from './ExpectedLength.module.css';
-
-const GREEN = '#16a34a';
-const RED = '#dc2626';
+import { COLOR_SUCCESS as GREEN, COLOR_DANGER as RED } from '../../../styles/colors';
 
 interface Blank {
   id: string;

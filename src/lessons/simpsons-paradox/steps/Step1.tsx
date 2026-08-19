@@ -3,10 +3,7 @@ import Spoiler from '../../../components/Spoiler';
 import ArrowPlots from '../components/ArrowPlots';
 import styles from './Step1.module.css';
 import type { StepProps } from '../../types';
-
-const BLUE = '#3b82f6';
-const GREEN = '#10b981';
-const GRAY = '#64748b';
+import { COLOR_PRIMARY as BLUE, COLOR_SUCCESS as GREEN, COLOR_TEXT_MUTED as GRAY } from '../../../styles/colors';
 
 export default function Step1({ onCompleteChange }: StepProps) {
   return (

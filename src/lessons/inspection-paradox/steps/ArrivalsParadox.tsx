@@ -1,8 +1,6 @@
 import Markdown from '../../../components/Markdown';
 import ArrivalsTimelineWidget from '../components/ArrivalsTimelineWidget';
-
-const GREEN = '#16a34a';
-const RED = '#dc2626';
+import { COLOR_SUCCESS as GREEN, COLOR_DANGER as RED } from '../../../styles/colors';
 
 export default function ArrivalsParadox() {
   return (

@@ -10,9 +10,7 @@ import {
   type Point,
 } from './plotShared';
 import styles from './plotShared.module.css';
-
-const BLUE = '#3b82f6';
-const GREEN = '#10b981';
+import { COLOR_PRIMARY as BLUE, COLOR_SUCCESS as GREEN } from '../../../styles/colors';
 
 const SIZE = 300;
 const MARGIN = { top: 8, right: 18, bottom: 36, left: 40 };

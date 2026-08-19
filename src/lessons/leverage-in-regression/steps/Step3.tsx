@@ -6,6 +6,7 @@ import VerticalSlider from '../components/VerticalSlider';
 import { generateAnisotropicCloud3D, pointOnDiagonal } from '../regression';
 import type { StepProps } from '../../types';
 import styles from './Step3.module.css';
+import { COLOR_SUCCESS, COLOR_DANGER } from '../../../styles/colors';
 
 const TRUE_A = 0.5;
 const TRUE_B = -0.4;
@@ -17,8 +18,8 @@ const DISTANCE_FROM_MEAN = 5;
 const DIAGONAL_POINT = pointOnDiagonal(DISTANCE_FROM_MEAN, 'diagonal');
 const ANTIDIAGONAL_POINT = pointOnDiagonal(DISTANCE_FROM_MEAN, 'antidiagonal');
 
-const LOW_LEVERAGE_COLOR = '#16a34a';
-const HIGH_LEVERAGE_COLOR = '#dc2626';
+const LOW_LEVERAGE_COLOR = COLOR_SUCCESS;
+const HIGH_LEVERAGE_COLOR = COLOR_DANGER;
 
 const XY_RANGE: [number, number] = [-10, 10];
 const Z_RANGE: [number, number] = [-15, 21];
