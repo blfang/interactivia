@@ -31,12 +31,6 @@ export default function SimulationGrid({
     }
   };
 
-  const handleReset = () => {
-    setZScores(Array(numPlots).fill(null));
-    setSimulations(0);
-    setSimulationsWithFinding(0);
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.controls}>
@@ -46,12 +40,6 @@ export default function SimulationGrid({
             onClick={handleSimulate}
           >
             Simulate
-          </button>
-          <button
-            className={`${styles.button} ${styles['button--secondary']}`}
-            onClick={handleReset}
-          >
-            Reset
           </button>
         </div>
         <span
