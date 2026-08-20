@@ -10,9 +10,8 @@ import { COLOR_SUCCESS, COLOR_DANGER } from '../../../styles/colors';
 const TRUE_SLOPE = 0.6;
 const TRUE_INTERCEPT = 1;
 const CLOUD_X_RANGE: [number, number] = [0, 8];
-const MEAN_X = (CLOUD_X_RANGE[0] + CLOUD_X_RANGE[1]) / 2;
 
-const LOW_LEVERAGE_X = MEAN_X + 1.5;
+const LOW_LEVERAGE_OFFSET = 1.0;
 const HIGH_LEVERAGE_X = 13;
 
 const LOW_LEVERAGE_COLOR = COLOR_SUCCESS;
@@ -30,30 +29,35 @@ export default function Step1({ onCompleteChange }: StepProps) {
   const [shift, setShift] = useState(0);
   const [interacted, setInteracted] = useState(false);
 
+  const sampleMeanX = basePoints.reduce((sum, p) => sum + p.x, 0) / basePoints.length;
+  const lowLeverageX = sampleMeanX + LOW_LEVERAGE_OFFSET;
+
   useEffect(() => {
     onCompleteChange?.(interacted);
   }, [interacted, onCompleteChange]);
 
   return (
     <>
-      <Markdown>{`
-Here's a cloud of points roughly following a line, $y = ax + b + \\text{noise}$. Suppose we add one more point, and we get to choose how far its $y$-value strays from the trend.
-
-Below, that extra point is added to **two identical copies** of the cloud, starting out exactly on the trend line. In the top plot, it sits near (but not exactly at) the mean of the other $x$-values, shown in green. In the bottom plot, it sits far out on the $x$-axis, shown in red. Drag the slider to shift the extra point's $y$-value up or down (by the same amount in both plots), and watch what happens to the fitted line, $\\hat{y} = \\hat{a}x + \\hat{b}$.
-      `}</Markdown>
+      <p>
+        Here's a cloud of points roughly following a line. In the top plot, there's an additional{' '}
+        <span style={{ color: LOW_LEVERAGE_COLOR, fontWeight: 'bold' }}>green</span> point near the middle of the cloud. In the bottom
+        plot, there's instead an additional <span style={{ color: HIGH_LEVERAGE_COLOR, fontWeight: 'bold' }}>red</span> point far from
+        the cloud. Drag the slider to shift the extra point's y-value up or down (by the same amount in both plots), and watch what
+        happens to the fitted line.
+      </p>
 
       <div className={styles.plotsRow}>
         <div className={styles.plotsStack}>
           <LeverageScatterPlot
-            title="Extra point near the mean of x"
+            title="Extra point near the sample mean of x"
             basePoints={basePoints}
-            extraPoint={{ x: LOW_LEVERAGE_X, y: trueY(LOW_LEVERAGE_X) + shift }}
+            extraPoint={{ x: lowLeverageX, y: trueY(lowLeverageX) + shift }}
             pointColor={LOW_LEVERAGE_COLOR}
             xRange={PLOT_X_RANGE}
             yRange={PLOT_Y_RANGE}
           />
           <LeverageScatterPlot
-            title="Extra point far from the mean of x"
+            title="Extra point far from the sample mean of x"
             basePoints={basePoints}
             extraPoint={{ x: HIGH_LEVERAGE_X, y: trueY(HIGH_LEVERAGE_X) + shift }}
             pointColor={HIGH_LEVERAGE_COLOR}
@@ -79,13 +83,7 @@ Below, that extra point is added to **two identical copies** of the cloud, start
       </p>
 
       <Markdown>{`
-A point far from the mean of $x$ has more **leverage** over the fitted line: it can pull the line toward it much more easily, because a small tilt of the line moves the fitted value at that $x$ by a large amount. A point near the mean of $x$ has little leverage, since the line pivots close to its own location — tilting the line doesn't move the fitted value there very much.
-
-Formally, for simple linear regression, the leverage of a point $x_i$ is
-
-$$h_i = \\frac{1}{n} + \\frac{(x_i - \\bar{x})^2}{\\sum_j (x_j - \\bar{x})^2}$$
-
-which grows with the squared distance from $x_i$ to the mean $\\bar{x}$.
+A point far from the sample mean of $x$ has more **leverage** over the fitted line: it can pull the line toward it much more easily, because a small tilt of the line moves the fitted value at that $x$ by a large amount. A point near the sample mean of $x$ has little leverage, since the line pivots close to its own location — tilting the line doesn't move the fitted value there very much.
       `}</Markdown>
     </>
   );

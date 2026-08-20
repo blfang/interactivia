@@ -13,7 +13,7 @@ const TRUE_B = -0.4;
 const TRUE_C = 2;
 const CLOUD_RADIUS = 3;
 
-const LOW_LEVERAGE_POINT = { x: 1.5, y: 1 };
+const LOW_LEVERAGE_OFFSET = { x: 1.5, y: 1 };
 const HIGH_LEVERAGE_POINT = { x: 9, y: 9 };
 
 const LOW_LEVERAGE_COLOR = COLOR_SUCCESS;
@@ -32,6 +32,12 @@ export default function Step2({ onCompleteChange }: StepProps) {
   const [interacted, setInteracted] = useState(false);
   const [camera, setCamera] = useState<SceneCamera>(DEFAULT_CAMERA);
 
+  const sampleCentroid = {
+    x: basePoints.reduce((sum, p) => sum + p.x, 0) / basePoints.length,
+    y: basePoints.reduce((sum, p) => sum + p.y, 0) / basePoints.length,
+  };
+  const lowLeveragePoint = { x: sampleCentroid.x + LOW_LEVERAGE_OFFSET.x, y: sampleCentroid.y + LOW_LEVERAGE_OFFSET.y };
+
   useEffect(() => {
     onCompleteChange?.(interacted);
   }, [interacted, onCompleteChange]);
@@ -48,7 +54,7 @@ Here's the $(x, y)$ predictor cloud viewed from directly above, with the extra p
         <PredictorCloudPlot
           title="Extra point near the cloud's center"
           basePoints={basePoints}
-          extraPoint={LOW_LEVERAGE_POINT}
+          extraPoint={lowLeveragePoint}
           pointColor={LOW_LEVERAGE_COLOR}
           xyRange={XY_RANGE}
         />
@@ -70,7 +76,7 @@ Now let's see how that translates into 3D. We add this same extra point to two i
           <Leverage3DPlot
             title="Extra point near the cloud's center"
             basePoints={basePoints}
-            extraPoint={{ ...LOW_LEVERAGE_POINT, z: trueZ(LOW_LEVERAGE_POINT) + shift }}
+            extraPoint={{ ...lowLeveragePoint, z: trueZ(lowLeveragePoint) + shift }}
             pointColor={LOW_LEVERAGE_COLOR}
             xyRange={XY_RANGE}
             zRange={Z_RANGE}

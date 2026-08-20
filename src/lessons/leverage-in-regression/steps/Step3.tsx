@@ -15,8 +15,8 @@ const STD_ALONG_DIAGONAL = 3.5;
 const STD_ALONG_ANTIDIAGONAL = 0.8;
 
 const DISTANCE_FROM_MEAN = 5;
-const DIAGONAL_POINT = pointOnDiagonal(DISTANCE_FROM_MEAN, 'diagonal');
-const ANTIDIAGONAL_POINT = pointOnDiagonal(DISTANCE_FROM_MEAN, 'antidiagonal');
+const DIAGONAL_OFFSET = pointOnDiagonal(DISTANCE_FROM_MEAN, 'diagonal');
+const ANTIDIAGONAL_OFFSET = pointOnDiagonal(DISTANCE_FROM_MEAN, 'antidiagonal');
 
 const LOW_LEVERAGE_COLOR = COLOR_SUCCESS;
 const HIGH_LEVERAGE_COLOR = COLOR_DANGER;
@@ -36,6 +36,13 @@ export default function Step3({ onCompleteChange }: StepProps) {
   const [interacted, setInteracted] = useState(false);
   const [camera, setCamera] = useState<SceneCamera>(DEFAULT_CAMERA);
 
+  const sampleCentroid = {
+    x: basePoints.reduce((sum, p) => sum + p.x, 0) / basePoints.length,
+    y: basePoints.reduce((sum, p) => sum + p.y, 0) / basePoints.length,
+  };
+  const diagonalPoint = { x: sampleCentroid.x + DIAGONAL_OFFSET.x, y: sampleCentroid.y + DIAGONAL_OFFSET.y };
+  const antidiagonalPoint = { x: sampleCentroid.x + ANTIDIAGONAL_OFFSET.x, y: sampleCentroid.y + ANTIDIAGONAL_OFFSET.y };
+
   useEffect(() => {
     onCompleteChange?.(interacted);
   }, [interacted, onCompleteChange]);
@@ -52,14 +59,14 @@ Here's a cloud that isn't: it's stretched out along the $(1, 1)$ direction, and 
         <PredictorCloudPlot
           title="Same distance, along the long (1, 1) axis"
           basePoints={basePoints}
-          extraPoint={DIAGONAL_POINT}
+          extraPoint={diagonalPoint}
           pointColor={LOW_LEVERAGE_COLOR}
           xyRange={XY_RANGE}
         />
         <PredictorCloudPlot
           title="Same distance, along the short (1, -1) axis"
           basePoints={basePoints}
-          extraPoint={ANTIDIAGONAL_POINT}
+          extraPoint={antidiagonalPoint}
           pointColor={HIGH_LEVERAGE_COLOR}
           xyRange={XY_RANGE}
         />
@@ -74,7 +81,7 @@ Now let's see how that translates into 3D. Drag the slider to shift each point's
           <Leverage3DPlot
             title="Same distance, along the long (1, 1) axis"
             basePoints={basePoints}
-            extraPoint={{ ...DIAGONAL_POINT, z: trueZ(DIAGONAL_POINT) + shift }}
+            extraPoint={{ ...diagonalPoint, z: trueZ(diagonalPoint) + shift }}
             pointColor={LOW_LEVERAGE_COLOR}
             xyRange={XY_RANGE}
             zRange={Z_RANGE}
@@ -84,7 +91,7 @@ Now let's see how that translates into 3D. Drag the slider to shift each point's
           <Leverage3DPlot
             title="Same distance, along the short (1, -1) axis"
             basePoints={basePoints}
-            extraPoint={{ ...ANTIDIAGONAL_POINT, z: trueZ(ANTIDIAGONAL_POINT) + shift }}
+            extraPoint={{ ...antidiagonalPoint, z: trueZ(antidiagonalPoint) + shift }}
             pointColor={HIGH_LEVERAGE_COLOR}
             xyRange={XY_RANGE}
             zRange={Z_RANGE}
