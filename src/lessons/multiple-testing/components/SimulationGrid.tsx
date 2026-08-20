@@ -22,13 +22,18 @@ export default function SimulationGrid({
   const [simulations, setSimulations] = useState(0);
   const [simulationsWithFinding, setSimulationsWithFinding] = useState(0);
 
-  const handleSimulate = () => {
-    const newZScores = Array.from({ length: numPlots }, () => simulateZ());
-    setZScores(newZScores);
-    setSimulations((s) => s + 1);
-    if (newZScores.some((z) => isSignificant(z, cutoff))) {
-      setSimulationsWithFinding((s) => s + 1);
+  const handleSimulate = (batchSize: number = 1) => {
+    let finalZScores: number[] = [];
+    let additionalFindings = 0;
+    for (let i = 0; i < batchSize; i++) {
+      finalZScores = Array.from({ length: numPlots }, () => simulateZ());
+      if (finalZScores.some((z) => isSignificant(z, cutoff))) {
+        additionalFindings++;
+      }
     }
+    setZScores(finalZScores);
+    setSimulations((s) => s + batchSize);
+    setSimulationsWithFinding((s) => s + additionalFindings);
   };
 
   return (
@@ -37,9 +42,15 @@ export default function SimulationGrid({
         <div className={styles.buttonRow}>
           <button
             className={`${styles.button} ${styles['button--primary']}`}
-            onClick={handleSimulate}
+            onClick={() => handleSimulate(1)}
           >
             Simulate
+          </button>
+          <button
+            className={`${styles.button} ${styles['button--secondary']}`}
+            onClick={() => handleSimulate(100)}
+          >
+            Simulate ×100
           </button>
         </div>
         <span

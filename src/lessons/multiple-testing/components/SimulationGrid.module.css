@@ -36,6 +36,13 @@
   composes: buttonPrimary from '../../../styles/common.module.css';
 }
 
+.button--secondary {
+  background: #64748b;
+}
+.button--secondary:hover:not(:disabled) {
+  background: #475569;
+}
+
 .counter {
   font-size: 1rem;
   color: #374151;

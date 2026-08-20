@@ -25,7 +25,6 @@ Click **Simulate** and **Simulate ×100** repeatedly. You'll likely see long str
         trueValue={TRUE_VALUE}
         targetPdf={standardNormalPdf}
         domain={DOMAIN}
-        plotMode="histogram"
         runningEstimateYMax={RUNNING_ESTIMATE_Y_MAX}
         onCompleteChange={onCompleteChange}
       />

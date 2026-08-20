@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import SampleHistogramPlot from './SampleHistogramPlot';
 import TargetVsProposalPlot from './TargetVsProposalPlot';
 import RunningEstimatePlot from './RunningEstimatePlot';
 import { INITIAL_ESTIMATOR_STATE, updateEstimator, estimate, importanceWeight } from '../simulation';
 import type { EstimatorState } from '../simulation';
 import styles from './MonteCarloWidget.module.css';
 
-const MAX_KEPT_SAMPLES = 5000;
 const MAX_KEPT_HISTORY = 3000;
 
 export default function MonteCarloWidget({
@@ -17,7 +15,6 @@ export default function MonteCarloWidget({
   trueValue,
   targetPdf,
   domain,
-  plotMode,
   proposalPdf,
   runningEstimateYMax,
   onCompleteChange,
@@ -30,14 +27,12 @@ export default function MonteCarloWidget({
   trueValue: number;
   targetPdf: (x: number) => number;
   domain: [number, number];
-  plotMode: 'histogram' | 'targetVsProposal';
   proposalPdf?: (x: number) => number;
   runningEstimateYMax?: number;
   onCompleteChange?: (complete: boolean) => void;
   width?: number;
 }) {
   const [estimatorState, setEstimatorState] = useState<EstimatorState>(INITIAL_ESTIMATOR_STATE);
-  const [samples, setSamples] = useState<number[]>([]);
   const [history, setHistory] = useState<number[]>([]);
   const [lastSample, setLastSample] = useState<number | null>(null);
 
@@ -50,24 +45,21 @@ export default function MonteCarloWidget({
 
   const handleSimulate = (batchSize: number) => {
     let state = estimatorState;
-    const newSamples: number[] = [];
+    let latest = lastSample;
     const newHistory: number[] = [];
     for (let i = 0; i < batchSize; i++) {
       const x = sampler();
       state = updateEstimator(state, x, interval, weightFn);
-      newSamples.push(x);
       newHistory.push(estimate(state));
+      latest = x;
     }
     setEstimatorState(state);
-    setSamples((prev) => [...prev, ...newSamples].slice(-MAX_KEPT_SAMPLES));
     setHistory((prev) => [...prev, ...newHistory].slice(-MAX_KEPT_HISTORY));
-    setLastSample(newSamples[newSamples.length - 1]);
+    setLastSample(latest);
   };
 
   const currentWeight =
-    plotMode === 'targetVsProposal' && lastSample !== null && proposalPdf
-      ? importanceWeight(lastSample, targetPdf, proposalPdf)
-      : null;
+    lastSample !== null && proposalPdf ? importanceWeight(lastSample, targetPdf, proposalPdf) : null;
 
   return (
     <div className={styles.container}>
@@ -101,26 +93,14 @@ export default function MonteCarloWidget({
         </div>
       </div>
       <div className={styles.plots} style={{ maxWidth: width }}>
-        {plotMode === 'histogram' ? (
-          <SampleHistogramPlot
-            samples={samples}
-            targetPdf={targetPdf}
-            domain={domain}
-            interval={interval}
-            width={width}
-          />
-        ) : (
-          proposalPdf && (
-            <TargetVsProposalPlot
-              targetPdf={targetPdf}
-              proposalPdf={proposalPdf}
-              domain={domain}
-              interval={interval}
-              lastSample={lastSample}
-              width={width}
-            />
-          )
-        )}
+        <TargetVsProposalPlot
+          targetPdf={targetPdf}
+          proposalPdf={proposalPdf}
+          domain={domain}
+          interval={interval}
+          lastSample={lastSample}
+          width={width}
+        />
         <span className={styles.plotLabel}>running estimate over successive draws</span>
         <RunningEstimatePlot
           history={history}

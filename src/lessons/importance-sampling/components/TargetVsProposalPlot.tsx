@@ -30,7 +30,7 @@ export default function TargetVsProposalPlot({
   height = 180,
 }: {
   targetPdf: (x: number) => number;
-  proposalPdf: (x: number) => number;
+  proposalPdf?: (x: number) => number;
   domain: [number, number];
   interval: [number, number];
   lastSample?: number | null;
@@ -47,7 +47,7 @@ export default function TargetVsProposalPlot({
     const N = 150;
     for (let i = 0; i <= N; i++) {
       const x = xMin + ((xMax - xMin) * i) / N;
-      p = Math.max(p, targetPdf(x), proposalPdf(x));
+      p = Math.max(p, targetPdf(x), proposalPdf ? proposalPdf(x) : 0);
     }
     return p;
   })();
@@ -68,14 +68,16 @@ export default function TargetVsProposalPlot({
         opacity={0.5}
       />
 
-      {/* proposal distribution g */}
-      <polyline
-        points={curve(proposalPdf, xMin, xMax, toSvgX, toSvgY)}
-        fill="none"
-        stroke={COLOR_DANGER}
-        strokeWidth={2}
-        strokeDasharray="5 4"
-      />
+      {/* proposal distribution g, when sampling from something other than the target */}
+      {proposalPdf && (
+        <polyline
+          points={curve(proposalPdf, xMin, xMax, toSvgX, toSvgY)}
+          fill="none"
+          stroke={COLOR_DANGER}
+          strokeWidth={2}
+          strokeDasharray="5 4"
+        />
+      )}
 
       {/* target distribution f */}
       <polyline

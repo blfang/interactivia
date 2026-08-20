@@ -22,7 +22,6 @@ This is **naive Monte Carlo**: draw from the target distribution itself, and cou
         trueValue={TRUE_VALUE}
         targetPdf={standardNormalPdf}
         domain={DOMAIN}
-        plotMode="histogram"
         onCompleteChange={onCompleteChange}
       />
     </>

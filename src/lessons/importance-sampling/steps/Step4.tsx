@@ -63,7 +63,6 @@ You can also try $g = N(4, 1)$: a more realistic proposal with full support, whe
         trueValue={TRUE_VALUE}
         targetPdf={standardNormalPdf}
         domain={DOMAIN}
-        plotMode="targetVsProposal"
         proposalPdf={proposalPdf}
         runningEstimateYMax={RUNNING_ESTIMATE_Y_MAX}
         onCompleteChange={onCompleteChange}
