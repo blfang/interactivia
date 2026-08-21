@@ -1,16 +1,23 @@
 import styles from './RunningEstimatePlot.module.css';
-import { COLOR_PRIMARY, COLOR_TEXT_MUTED } from '../../../styles/colors';
+import { COLOR_TEXT_MUTED } from '../../../styles/colors';
 
-const MARGIN = { top: 10, right: 14, bottom: 24, left: 44 };
+const MARGIN = { top: 18, right: 14, bottom: 24, left: 44 };
+
+export interface EstimateSeries {
+  history: number[];
+  totalDraws?: number;
+  color: string;
+  label?: string;
+}
 
 export default function RunningEstimatePlot({
-  history,
+  series,
   trueValue,
   yMax,
   width = 400,
   height = 180,
 }: {
-  history: number[];
+  series: EstimateSeries[];
   trueValue: number;
   yMax?: number;
   width?: number;
@@ -19,21 +26,31 @@ export default function RunningEstimatePlot({
   const plotW = width - MARGIN.left - MARGIN.right;
   const plotH = height - MARGIN.top - MARGIN.bottom;
 
-  const resolvedYMax = yMax ?? Math.max(trueValue * 1.4, ...history, 1e-9) * 1.1;
-  const n = history.length;
-  const xMax = Math.max(n - 1, 1);
+  const maxLen = Math.max(1, ...series.map((s) => s.history.length));
+  const allValues = series.flatMap((s) => s.history);
+  const resolvedYMax = yMax ?? Math.max(trueValue * 1.4, ...allValues, 1e-9) * 1.1;
+  const xMax = Math.max(maxLen - 1, 1);
+  const n = Math.max(0, ...series.map((s) => s.history.length));
+  const total = Math.max(0, ...series.map((s) => s.totalDraws ?? s.history.length));
+  const drawsLabel = total > n ? `last ${n} of ${total} draws` : `${n} draws`;
+  const hasLabels = series.some((s) => s.label);
 
   const toSvgX = (i: number) => MARGIN.left + (i / xMax) * plotW;
   const toSvgY = (y: number) => MARGIN.top + (1 - y / resolvedYMax) * plotH;
 
-  const linePoints = history
-    .map((y, i) => `${toSvgX(i).toFixed(2)},${toSvgY(y).toFixed(2)}`)
-    .join(' ');
-
-  const currentEstimate = n > 0 ? history[n - 1] : 0;
-
   return (
     <svg viewBox={`0 0 ${width} ${height}`} className={styles.plot}>
+      {/* legend, when series are labeled */}
+      {hasLabels &&
+        series.map((s, i) => (
+          <g key={i} transform={`translate(${MARGIN.left + i * 140}, 10)`}>
+            <circle cx={4} cy={0} r={3} fill={s.color} />
+            <text x={10} y={3} fontSize={9} fill={COLOR_TEXT_MUTED}>
+              {s.label}
+            </text>
+          </g>
+        ))}
+
       {/* axes */}
       <line
         x1={MARGIN.left}
@@ -67,7 +84,7 @@ export default function RunningEstimatePlot({
         fontSize={10}
         fill={COLOR_TEXT_MUTED}
       >
-        {n} draws
+        {drawsLabel}
       </text>
 
       {/* true value reference line */}
@@ -84,11 +101,20 @@ export default function RunningEstimatePlot({
         true value
       </text>
 
-      {/* running estimate */}
-      {n > 1 && <polyline points={linePoints} fill="none" stroke={COLOR_PRIMARY} strokeWidth={2} />}
-      {n > 0 && (
-        <circle cx={toSvgX(n - 1)} cy={toSvgY(currentEstimate)} r={3} fill={COLOR_PRIMARY} />
-      )}
+      {/* running estimate(s) */}
+      {series.map((s, i) => {
+        const sn = s.history.length;
+        const linePoints = s.history
+          .map((y, j) => `${toSvgX(j).toFixed(2)},${toSvgY(y).toFixed(2)}`)
+          .join(' ');
+        const currentEstimate = sn > 0 ? s.history[sn - 1] : 0;
+        return (
+          <g key={i}>
+            {sn > 1 && <polyline points={linePoints} fill="none" stroke={s.color} strokeWidth={2} />}
+            {sn > 0 && <circle cx={toSvgX(sn - 1)} cy={toSvgY(currentEstimate)} r={3} fill={s.color} />}
+          </g>
+        );
+      })}
     </svg>
   );
 }

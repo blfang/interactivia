@@ -3,7 +3,10 @@ import TargetVsProposalPlot from './TargetVsProposalPlot';
 import RunningEstimatePlot from './RunningEstimatePlot';
 import { INITIAL_ESTIMATOR_STATE, updateEstimator, estimate, importanceWeight } from '../simulation';
 import type { EstimatorState } from '../simulation';
+import { COLOR_PRIMARY } from '../../../styles/colors';
 import styles from './MonteCarloWidget.module.css';
+
+const LAST_SAMPLE_COLOR = '#1e293b';
 
 const MAX_KEPT_HISTORY = 3000;
 
@@ -98,12 +101,12 @@ export default function MonteCarloWidget({
           proposalPdf={proposalPdf}
           domain={domain}
           interval={interval}
-          lastSample={lastSample}
+          markers={lastSample !== null ? [{ x: lastSample, color: LAST_SAMPLE_COLOR }] : []}
           width={width}
         />
         <span className={styles.plotLabel}>running estimate over successive draws</span>
         <RunningEstimatePlot
-          history={history}
+          series={[{ history, totalDraws: estimatorState.n, color: COLOR_PRIMARY }]}
           trueValue={trueValue}
           yMax={runningEstimateYMax}
           width={width}

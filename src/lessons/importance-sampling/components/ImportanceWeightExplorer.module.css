@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.plot {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  display: block;
+  cursor: crosshair;
+}
+
+.readout {
+  font-size: 0.9rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  min-height: 1.4em;
+}
+
+.readoutHint {
+  color: #64748b;
+}

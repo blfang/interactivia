@@ -25,7 +25,8 @@ export default function TargetVsProposalPlot({
   proposalPdf,
   domain,
   interval,
-  lastSample = null,
+  markers = [],
+  yMax,
   width = 400,
   height = 180,
 }: {
@@ -33,7 +34,8 @@ export default function TargetVsProposalPlot({
   proposalPdf?: (x: number) => number;
   domain: [number, number];
   interval: [number, number];
-  lastSample?: number | null;
+  markers?: { x: number; color: string }[];
+  yMax?: number;
   width?: number;
   height?: number;
 }) {
@@ -42,19 +44,20 @@ export default function TargetVsProposalPlot({
   const plotW = width - MARGIN.left - MARGIN.right;
   const plotH = height - MARGIN.top - MARGIN.bottom;
 
-  const peak = (() => {
-    let p = 0;
-    const N = 150;
-    for (let i = 0; i <= N; i++) {
-      const x = xMin + ((xMax - xMin) * i) / N;
-      p = Math.max(p, targetPdf(x), proposalPdf ? proposalPdf(x) : 0);
-    }
-    return p;
-  })();
-  const yMax = peak * 1.15;
+  const resolvedYMax =
+    yMax ??
+    (() => {
+      let p = 0;
+      const N = 150;
+      for (let i = 0; i <= N; i++) {
+        const x = xMin + ((xMax - xMin) * i) / N;
+        p = Math.max(p, targetPdf(x), proposalPdf ? proposalPdf(x) : 0);
+      }
+      return p * 1.15;
+    })();
 
   const toSvgX = (x: number) => MARGIN.left + ((x - xMin) / (xMax - xMin)) * plotW;
-  const toSvgY = (y: number) => MARGIN.top + (1 - y / yMax) * plotH;
+  const toSvgY = (y: number) => MARGIN.top + (1 - y / resolvedYMax) * plotH;
 
   return (
     <svg viewBox={`0 0 ${width} ${height}`} className={styles.plot}>
@@ -87,17 +90,18 @@ export default function TargetVsProposalPlot({
         strokeWidth={2}
       />
 
-      {/* most recent draw */}
-      {lastSample !== null && (
+      {/* most recent draw(s) */}
+      {markers.map((m, i) => (
         <line
-          x1={toSvgX(lastSample)}
+          key={i}
+          x1={toSvgX(m.x)}
           y1={MARGIN.top}
-          x2={toSvgX(lastSample)}
+          x2={toSvgX(m.x)}
           y2={height - MARGIN.bottom}
-          stroke="#1e293b"
+          stroke={m.color}
           strokeWidth={1.5}
         />
-      )}
+      ))}
 
       {/* x-axis */}
       <line
