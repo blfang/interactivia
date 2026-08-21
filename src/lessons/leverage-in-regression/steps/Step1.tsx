@@ -78,12 +78,11 @@ export default function Step1({ onCompleteChange }: StepProps) {
         />
       </div>
 
-      <p className={styles.note}>
-        Drag the slider up and down. Notice that the top plot's line barely moves, while the bottom plot's line swings dramatically.
-      </p>
 
       <Markdown>{`
-A point far from the sample mean of $x$ has more **leverage** over the fitted line: it can pull the line toward it much more easily, because a small tilt of the line moves the fitted value at that $x$ by a large amount. A point near the sample mean of $x$ has little leverage, since the line pivots close to its own location — tilting the line doesn't move the fitted value there very much.
+A point far from the sample mean of $x$ has more **leverage** over the fitted line:
+it can pull the line toward it much more easily.
+A point near the sample mean of $x$ has little leverage.
       `}</Markdown>
     </>
   );

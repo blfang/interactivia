@@ -112,14 +112,11 @@ Now let's see how that translates into 3D. Drag the slider to shift each point's
         />
       </div>
 
-      <p className={styles.note}>
-        Both extra points sit exactly {DISTANCE_FROM_MEAN} units from the center. Yet the bottom plane tilts far more than the top plane as you move the slider.
-      </p>
 
       <Markdown>{`
 Distance alone doesn't determine leverage — what matters is distance **relative to the spread of the cloud in that direction**. The point along the long axis is unremarkable: plenty of real data points land that far out along $(1, 1)$, so it barely disturbs the fit. The point along the short axis is a genuine outlier in the predictors: almost no data lands that far out along $(1, -1)$, so the fit bends sharply to accommodate it.
 
-This is why leverage, more precisely, is measured in **Mahalanobis distance** — distance rescaled by the covariance of the predictors — rather than ordinary Euclidean distance.
+This is why leverage, more precisely, is measured in **Mahalanobis distance** (distance rescaled by the covariance of the predictors) rather than ordinary Euclidean distance.
       `}</Markdown>
     </>
   );

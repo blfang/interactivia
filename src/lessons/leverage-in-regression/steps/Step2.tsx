@@ -45,10 +45,15 @@ export default function Step2({ onCompleteChange }: StepProps) {
   return (
     <>
       <Markdown>{`
-Leverage isn't just a 1D idea — it generalizes to any number of predictors. Here, points are drawn from an isotropic cloud around $(x, y) = (0, 0)$, with $z = ax + by + c + \\text{noise}$.
+Let's look at an example with two predictors (instead of just one) to see how the concept of leverage generalizes.
+Here, points are drawn from an isotropic cloud around $(x, y) = (0, 0)$, with $z = ax + by + c + \\text{noise}$.
 
-Here's the $(x, y)$ predictor cloud viewed from directly above, with the extra point placed near (but not exactly at) the center in the first plot, shown in green, and far from it in the second, shown in red:
+Here's the $(x, y)$ predictor cloud viewed from directly above, with the extra point placed near the center in the first plot, and far from it in the second:
       `}</Markdown>
+      <p>
+        The near point is shown in <span style={{ color: LOW_LEVERAGE_COLOR, fontWeight: 'bold' }}>green</span>, and the far point is
+        shown in <span style={{ color: HIGH_LEVERAGE_COLOR, fontWeight: 'bold' }}>red</span>.
+      </p>
 
       <div className={styles.scatterRow}>
         <PredictorCloudPlot
@@ -68,7 +73,8 @@ Here's the $(x, y)$ predictor cloud viewed from directly above, with the extra p
       </div>
 
       <Markdown>{`
-Now let's see how that translates into 3D. We add this same extra point to two identical copies of the cloud, starting out exactly on the trend plane. Drag the slider to shift its $z$-value up or down (by the same amount in both plots), and watch the fitted plane $\\hat{z} = \\hat{a}x + \\hat{b}y + \\hat{c}$ tilt. You can also drag either plot to rotate it — both plots stay in sync, so you can compare them from any angle.
+Now let's see how that translates into 3D. We add this same extra point to two identical copies of the cloud, starting out exactly on the trend plane.
+Drag the slider to shift its $z$-value up or down (by the same amount in both plots), and watch the fitted plane tilt.
       `}</Markdown>
 
       <div className={styles.plotsRow}>
@@ -107,12 +113,9 @@ Now let's see how that translates into 3D. We add this same extra point to two i
         />
       </div>
 
-      <p className={styles.note}>
-        The top plane barely tilts as you move the slider. The bottom plane pivots dramatically around the rest of the cloud, since the far-out point has much more leverage.
-      </p>
 
       <Markdown>{`
-This is why points that are outliers in their **predictors** — not just in the outcome — deserve extra scrutiny in a regression: a single high-leverage point can dominate the fit, even if it's the only point that "disagrees" with the trend.
+This is why points that are outliers in their **predictors** deserve extra scrutiny in a regression: a single high-leverage point can dominate the fit, even if it's the only point that "disagrees" with the trend.
       `}</Markdown>
     </>
   );
