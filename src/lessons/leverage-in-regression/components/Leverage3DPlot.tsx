@@ -1,3 +1,4 @@
+import { useCallback, useRef } from 'react';
 import Plot from 'react-plotly.js';
 import type { Data, Layout } from 'plotly.js';
 import { fitPlaneRegression, type Point3D } from '../regression';
@@ -9,6 +10,12 @@ const GRID_N = 12;
 export type SceneCamera = NonNullable<NonNullable<Layout['scene']>['camera']>;
 
 export const DEFAULT_CAMERA: SceneCamera = { eye: { x: 1.6, y: -1.6, z: 1.1 } };
+
+// plotly.js's gl3d scene only fires `plotly_relayout` (the `onRelayout` prop) on mouseup/wheel,
+// not on touchend, so on mobile we read the rotated camera back off the graph div ourselves.
+// `_fullLayout.scene.camera` is only synced on mouseup/wheel too, so we have to go through the
+// internal `_scene` orbit-camera controller's `getCamera()` to get the live, on-screen camera.
+type PlotlyGraphDiv = HTMLElement & { _fullLayout?: { scene?: { _scene?: { getCamera(): SceneCamera } } } };
 
 interface Leverage3DPlotProps {
   basePoints: Point3D[];
@@ -31,6 +38,24 @@ export default function Leverage3DPlot({
   camera,
   onCameraChange,
 }: Leverage3DPlotProps) {
+  const graphDivRef = useRef<PlotlyGraphDiv | null>(null);
+
+  const handleTouchEnd = useCallback(() => {
+    const touchCamera = graphDivRef.current?._fullLayout?.scene?._scene?.getCamera();
+    if (touchCamera) onCameraChange(touchCamera);
+  }, [onCameraChange]);
+
+  const attachTouchListener = useCallback(
+    (_figure: unknown, graphDiv: Readonly<HTMLElement>) => {
+      const gd = graphDiv as PlotlyGraphDiv;
+      if (graphDivRef.current === gd) return;
+      graphDivRef.current?.removeEventListener('touchend', handleTouchEnd);
+      gd.addEventListener('touchend', handleTouchEnd);
+      graphDivRef.current = gd;
+    },
+    [handleTouchEnd]
+  );
+
   const { a, b, c } = fitPlaneRegression([...basePoints, extraPoint]);
 
   const [lo, hi] = xyRange;
@@ -99,6 +124,9 @@ export default function Leverage3DPlot({
             const newCamera = (event as Record<string, unknown>)['scene.camera'] as SceneCamera | undefined;
             if (newCamera) onCameraChange(newCamera);
           }}
+          onInitialized={attachTouchListener}
+          onUpdate={attachTouchListener}
+          onPurge={() => graphDivRef.current?.removeEventListener('touchend', handleTouchEnd)}
         />
       </div>
     </div>
