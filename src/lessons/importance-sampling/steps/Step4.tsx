@@ -32,11 +32,17 @@ export default function Step4({ onCompleteChange }: StepProps) {
   return (
     <>
       <Markdown>{`
-Instead of sampling from the target distribution $N(0,1)$, let's sample from a **proposal distribution** $g$ that puts its mass right where we're looking: near $${RARE_INTERVAL_LABEL}$.
+Instead of sampling from the target distribution density of $N(0,1)$ (with density $f$), let's sample from a **proposal distribution** with density $g$ that puts its mass right where we're looking: near $${RARE_INTERVAL_LABEL}$.
 
 If we take the fraction of samples that lie in the interval, we'll get the wrong answer: that's the probability under the proposal distribution, not the original distribution!
 
-To correct for this, we instead take a *weighted* fraction, where a sample $x_i$ has *importance weight* $w(x_i) = f(x_i)/g(x_i)$.
+To correct for this, we instead take a **weighted** fraction, where a sample $x_i$ has **importance weight** $w(x_i) = f(x_i)/g(x_i)$.
+
+$$\\dfrac{\\sum_{i : x_i \\in [3, 5]} w(x_i)}{\\sum_{i} w(x_i)}.$$
+
+This is a generalization of direct sampling from the target distribution, which is the special case $w(x_i) = f(x_i)/f(x_i) = 1$.
+
+Click on the diagram to see weights of different points.
       `}</Markdown>
       <ImportanceWeightExplorer
         proposalMean={PROPOSAL_NORMAL_MEAN}
@@ -46,11 +52,13 @@ To correct for this, we instead take a *weighted* fraction, where a sample $x_i$
       <Markdown>{`
 This estimator is still unbiased for $P(X \\in ${RARE_INTERVAL_LABEL})$ under $f$. It just reweights each draw by how much more (or less) likely $f$ was to produce it than $g$ was.
 
+---
+
 Below, each click of **Simulate** runs *both* approaches at once, so you can compare them directly: the naive estimator keeps drawing from $N(0,1)$ itself (as in the previous step), while the importance-sampling estimator draws from $g$ and reweights.
 
-With the default proposal, $g = N(${PROPOSAL_NORMAL_MEAN}, 1)$, this is a realistic proposal with full support, where occasional draws fall outside ${RARE_INTERVAL_LABEL} and contribute a weight but no hit. Try **Simulate** and **Simulate ×100**, and watch the importance-sampling estimate settle down quickly while the naive estimate keeps lagging.
+With the default proposal distribution $N(${PROPOSAL_NORMAL_MEAN}, 1)$, occasional draws fall outside ${RARE_INTERVAL_LABEL} and contribute a weight but no hit. Try **Simulate** and **Simulate ×100**, and watch the importance-sampling estimate settle down quickly while the naive estimate keeps lagging.
 
-You can also try $g = \\text{Uniform}(${PROPOSAL_LO}, ${PROPOSAL_HI})$: every draw then lands in ${RARE_INTERVAL_LABEL}, so nothing is wasted.
+You can also try $\\text{Uniform}(${PROPOSAL_LO}, ${PROPOSAL_HI})$ as another proposal distribution: every draw then lands in ${RARE_INTERVAL_LABEL}, so samples are not "wasted."
       `}</Markdown>
       <div className={styles.toggleRow}>
         <span>Importance-sampling proposal:</span>
