@@ -73,7 +73,7 @@ Here's the $(x, y)$ predictor cloud viewed from directly above, with the extra p
       </div>
 
       <Markdown>{`
-Now let's see how that translates into 3D. We add this same extra point to two identical copies of the cloud, starting out exactly on the trend plane.
+Now let's see how that affects prediction of the response variable $z$ We add this same extra point to two identical copies of the cloud.
 Drag the slider to shift its $z$-value up or down (by the same amount in both plots), and watch the fitted plane tilt.
       `}</Markdown>
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Markdown from '../../../components/Markdown';
+import MathComponent from '../../../components/Math';
 import Leverage3DPlot, { DEFAULT_CAMERA, type SceneCamera } from '../components/Leverage3DPlot';
 import PredictorCloudPlot from '../components/PredictorCloudPlot';
 import VerticalSlider from '../components/VerticalSlider';
@@ -50,10 +51,16 @@ export default function Step3({ onCompleteChange }: StepProps) {
   return (
     <>
       <Markdown>{`
-So far, leverage has tracked plain distance from the center of the predictor cloud. But that's really a special case — it only works because those clouds were **isotropic** (equally spread out in every direction).
-
-Here's a cloud that isn't: it's stretched out along the $(1, 1)$ direction, and squeezed tight along the $(1, -1)$ direction. Viewed from directly above, in the $(x, y)$ plane, it's shaped like a tilted ellipse rather than a circle. The two plots below place the extra point the same Euclidean distance from the center — one out along the cloud's long axis $(1, 1)$, shown in green, one out along its short axis $(1, -1)$, shown in red:
+Here's a cloud that isn't equally spread out in all directions: it's stretched out along the $(1, 1)$ direction, and squeezed tight along the $(1, -1)$ direction.
+Viewed from directly above, in the $(x, y)$ plane, it's shaped like a tilted ellipse rather than a circle.
       `}</Markdown>
+      <p>
+        The two plots below place the extra point the same Euclidean distance from the center: one out along
+        the cloud's long axis <MathComponent math="(1, 1)" />, shown in{' '}
+        <span style={{ color: LOW_LEVERAGE_COLOR, fontWeight: 'bold' }}>green</span>, one out along its short
+        axis <MathComponent math="(1, -1)" />, shown in{' '}
+        <span style={{ color: HIGH_LEVERAGE_COLOR, fontWeight: 'bold' }}>red</span>:
+      </p>
 
       <div className={styles.scatterRow}>
         <PredictorCloudPlot
@@ -73,7 +80,7 @@ Here's a cloud that isn't: it's stretched out along the $(1, 1)$ direction, and 
       </div>
 
       <Markdown>{`
-Now let's see how that translates into 3D. Drag the slider to shift each point's $z$-value away from the trend plane and compare how much leverage each one has.
+Now let's see how that affects the fitted plane. Drag the slider to shift each point's $z$-value away from the trend plane and compare how much leverage each one has.
       `}</Markdown>
 
       <div className={styles.plotsRow}>
@@ -114,7 +121,7 @@ Now let's see how that translates into 3D. Drag the slider to shift each point's
 
 
       <Markdown>{`
-Distance alone doesn't determine leverage — what matters is distance **relative to the spread of the cloud in that direction**. The point along the long axis is unremarkable: plenty of real data points land that far out along $(1, 1)$, so it barely disturbs the fit. The point along the short axis is a genuine outlier in the predictors: almost no data lands that far out along $(1, -1)$, so the fit bends sharply to accommodate it.
+Distance from the mean by itself doesn't determine leverage. What matters is distance **relative to the spread of the cloud in that direction**. The point along the long axis is unremarkable: plenty of real data points land that far out along $(1, 1)$, so it barely disturbs the fit. The point along the short axis is a genuine outlier in the predictors: almost no data lands that far out along $(1, -1)$, so the fit bends sharply to accommodate it.
 
 This is why leverage, more precisely, is measured in **Mahalanobis distance** (distance rescaled by the covariance of the predictors) rather than ordinary Euclidean distance.
       `}</Markdown>

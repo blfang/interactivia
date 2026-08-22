@@ -9,16 +9,14 @@ export default function Step6() {
 The previous plot assumed the $m$ tests were independent. But what if they're correlated?
       `}</Markdown>
       <p>
-        (Maybe <span style={{ color: COLOR_PRIMARY, fontWeight: 'bold' }}>blue</span> jelly beans'
-        acne-causing properties are correlated with{' '}
-        <span style={{ color: COLOR_DANGER, fontWeight: 'bold' }}>red</span> ones.)
+        (Maybe blue jelly beans' acne-causing properties are correlated with red ones.)
       </p>
       <Markdown>{`
 In general, we don't necessarily know how different tests are correlated.
 Despite this, the Bonferroni correction still keeps the probability of a false discovery below 5%.
 
 For illustration, we can consider a specific example correlation structure where each pair of tests has correlation $\\rho$.
-Drag the slider below to change $\\rho$ from 0 (independent) to 1 (perfectly correlated), and see how the probability of at least one mistaken discovery changes.
+Drag the slider below to change $\\rho$ from 0 (uncorrelated) to 1 (perfectly correlated), and see how the probability of at least one false discovery changes.
       `}</Markdown>
       <p>
         The plot below shows the results both without correction (
