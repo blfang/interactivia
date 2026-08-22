@@ -1,6 +1,6 @@
 import Markdown from '../../../components/Markdown';
 import CorrelatedTestingPlot from '../components/CorrelatedTestingPlot';
-import { COLOR_PRIMARY, COLOR_SUCCESS, COLOR_DANGER } from '../../../styles/colors';
+import { COLOR_PRIMARY, COLOR_SUCCESS } from '../../../styles/colors';
 
 export default function Step6() {
   return (
