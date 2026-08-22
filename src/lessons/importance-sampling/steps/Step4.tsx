@@ -38,11 +38,11 @@ If we take the fraction of samples that lie in the interval, we'll get the wrong
 
 To correct for this, we instead take a **weighted** fraction, where a sample $x_i$ has **importance weight** $w(x_i) = f(x_i)/g(x_i)$.
 
-$$\\dfrac{\\sum_{i : x_i \\in [3, 5]} w(x_i)}{\\sum_{i} w(x_i)}.$$
+$$\\dfrac{1}{N}\\sum_{i : x_i \\in [3, 5]} w(x_i).$$
 
 This is a generalization of direct sampling from the target distribution, which is the special case $w(x_i) = f(x_i)/f(x_i) = 1$.
 
-Click on the diagram to see weights of different points.
+Click on the diagram to see weights of different points. Where are weights large and where are they small?
       `}</Markdown>
       <ImportanceWeightExplorer
         proposalMean={PROPOSAL_NORMAL_MEAN}
