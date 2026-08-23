@@ -32,7 +32,7 @@ export default function Step4({ onCompleteChange }: StepProps) {
   return (
     <>
       <Markdown>{`
-Instead of sampling from the target distribution density of $N(0,1)$ (with density $f$), let's sample from a **proposal distribution** with density $g$ that puts its mass right where we're looking: near $${RARE_INTERVAL_LABEL}$.
+Instead of sampling from the target distribution density of $N(0,1)$ (with density $f$), let's sample from a **proposal distribution** with density $g$ that puts its mass where we're looking: near $${RARE_INTERVAL_LABEL}$.
 
 If we take the fraction of samples that lie in the interval, we'll get the wrong answer: that's the probability under the proposal distribution, not the original distribution!
 

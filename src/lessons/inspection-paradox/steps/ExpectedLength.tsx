@@ -85,9 +85,9 @@ export default function ExpectedLength({ onCompleteChange }: StepProps) {
   return (
     <>
       <Markdown>{`
-Let $X$ denote the time between two consecutive bus arrivals — the interval length you've been simulating.
+Let $X$ denote the time between two consecutive bus arrivals (the interval length you've been simulating).
 
-It turns out the expected length of the interval containing a fixed time (like 10am) is
+It [turns out](https://www.columbia.edu/%7Eks20/stochastic-I/stochastic-I-RRT.pdf) the expected length of the interval containing a fixed time (like 10am) is
 $E[X^2] / E[X]$.
       `}</Markdown>
       <p>
