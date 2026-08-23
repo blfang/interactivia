@@ -16,7 +16,7 @@ export default function Step4({ onCompleteChange }: StepProps) {
   return (
     <>
       <Markdown>{`
-To keep the overall chance of at least one mistaken finding at 5% when running $m$ tests, we need to adjust each individual test's threshold for declaring a finding.
+To keep the overall chance of at least one false discovery finding at 5% when running $m$ tests, we need to adjust each individual test's threshold for declaring a finding.
 
 Should we **increase** or **decrease** each individual test's significance level from 5%?
       `}</Markdown>

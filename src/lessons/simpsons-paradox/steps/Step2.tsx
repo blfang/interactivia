@@ -7,7 +7,11 @@ export default function Step2({ onCompleteChange }: StepProps) {
   return (
     <>
       <Markdown>{`
-To make the connection to Simpson's paradox, note that the slope of the vector (x, y) is the fraction y / x.
+To make the connection to Simpson's paradox:
+
+* The the slope of a vector $(x, y)$ is the fraction $y / x$. It represents the fraction of $x$ trials that led to a success (e.g., fraction of college applications who were accepted).
+* If $y_1/x_1$ and $y_2/x_2$ are the slopes of the vectors in Groups 1 and 2,
+the slope in the combined plot is $\\dfrac{y_1+y_2}{x_1+x_2}$. This represents the overall fraction of success across both groups.
 
 The paradox:
       `}</Markdown>

@@ -25,7 +25,7 @@ export default function Step3({ onCompleteChange }: StepProps) {
       <Markdown>{`
 Let's try to understand why so many of the previous page's simulations had false discoveires.
 
-When an individual test has a 5% chance of a falsely discovering something (when there is nothing to discover), what is the probability of at least one mistaken discovery among **m independent tests**?
+When an individual test has a 5% chance of a falsely discovering something (when there is nothing to discover), what is the probability of at least one false discovery among **m independent tests**?
       `}</Markdown>
 
       <p className={styles.hint}>
@@ -51,12 +51,12 @@ Right! Here's the reasoning:
 - For **m independent tests**, the probability of no false discoveries in all tests is $(1 - 0.05)^m$.
 - The probability of **at least one false discovery** is the complement: $1 - (1 - 0.05)^m$.
 
-If we plot this against $m$, we see the probability of at least one mistake grows very quickly: it is 72% when there are 25 tests, which matches what you may have seen in the previous example!
+If we plot this against $m$, we see the probability of at least one false discovery grows very quickly: it is 72% when there are 25 tests, which matches what you may have seen in the previous example!
               `}</Markdown>
             </div>
 
             <h3 className={styles.plotTitle}>
-              Probability of at least one mistake vs. number of tests
+              Probability of at least one false discovery vs. number of tests
             </h3>
             <MultipleTestingPlot width={600} height={400} />
             <div className={styles.explanation}>
