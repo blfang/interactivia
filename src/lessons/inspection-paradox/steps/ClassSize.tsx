@@ -17,14 +17,14 @@ How will the survey average compare to the average class size of (50+50+10+10) /
 
       <MultipleChoiceQuestion options={OPTIONS} correctAnswer={CORRECT_ANSWER}>
         <Markdown>{`
-Right! Because the large classes have far more students in them, they're more likely to be surveyed — so the average answer tends to come out well above 30.
+Right! Because the large classes have far more students in them, they're more likely to be surveyed,  so the average answer tends to come out well above 30.
 
 Try it yourself below.
         `}</Markdown>
         <ClassSizeWidget />
 
         <Markdown>{`
-This is the **inspection paradox**: the thing you "inspect" (a randomly chosen student, or — as we'll see next — a randomly chosen moment in time) tends to land in a larger-than-average interval or group.
+This is the **inspection paradox**: the thing you "inspect" (e.g., a randomly chosen student) tends to land in a larger-than-average interval or group.
       `}</Markdown>
       </MultipleChoiceQuestion>
     </>

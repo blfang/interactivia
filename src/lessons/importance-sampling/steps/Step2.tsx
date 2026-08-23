@@ -13,7 +13,7 @@ export default function Step2({ onCompleteChange }: StepProps) {
       <Markdown>{`
 We can estimate a probability like $P(-1 \\le X \\le 1)$ for $X \\sim N(0,1)$ by **simulating**: draw a lot of samples, and see what fraction land in the interval.
 
-Click **Simulate** to draw a sample from $N(0,1)$. Each sample either lands in $[-1, 1]$ or it doesn't — the running estimate below is just the fraction of samples so far that landed inside.
+Click **Simulate** to draw a sample from $N(0,1)$. The running estimate below is just the fraction of samples so far that landed inside the interval $[-1, 1]$.
 
 This is **naive Monte Carlo**: draw from the target distribution itself, and count. Try it a few times, then try **Simulate ×100** to get more samples quickly. The estimate should settle in near the true value (about 0.6827) fairly quickly.
       `}</Markdown>

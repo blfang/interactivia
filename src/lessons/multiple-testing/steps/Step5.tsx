@@ -7,9 +7,9 @@ export default function Step5() {
   return (
     <>
       <Markdown>{`
-As you just saw, requiring each individual test to be mistaken only $5\\%/m$ of the time — the Bonferroni correction — keeps the overall chance of a mistake under control.
+As you just saw, requiring each individual test to be mistaken only $5\\%/m$ of the time (the Bonferroni correction) keeps the overall chance of a mistake under control.
 
-For **m independent tests**, the probability of at least one mistake with Bonferroni correction is
+For **m independent tests**, the probability of at least one false discovery with Bonferroni correction is
 $1 - (1 - 0.05/m)^m$.
 
 Compare this to the uncorrected probability: $1 - (1 - 0.05)^m$.
