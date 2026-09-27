@@ -9,7 +9,7 @@ export default function ClassSize() {
   return (
     <>
       <Markdown>{`
-A school has 4 classes: two of size 50, and two of size 10.
+A school has 4 classes: two of size 50, and two of size 10. Each student is in only one class.
 
 Suppose we survey 20 random students and ask each how big their class is, then average their 20 answers.
 How will the survey average compare to the average class size of (50+50+10+10) / 4 = 30?
