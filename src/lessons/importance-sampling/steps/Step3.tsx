@@ -10,11 +10,11 @@ export default function Step3({ onCompleteChange }: StepProps) {
   return (
     <>
       <Markdown>{`
-Now let's estimate a **rare** event instead: $P(${lo} \\le X \\le ${hi})$. Same idea — draw from $N(0,1)$, check whether the sample landed in ${RARE_INTERVAL_LABEL}, track the running fraction.
+Now let's estimate a **rare** event instead: $P(${lo} \\le X \\le ${hi})$. We'll draw from $N(0,1)$, check whether the sample landed in ${RARE_INTERVAL_LABEL}, and track the running fraction.
 
 Before clicking, guess: out of 100 draws, how many do you expect to land in ${RARE_INTERVAL_LABEL}?
 
-Click **Simulate** and **Simulate ×100** repeatedly. You'll likely see long stretches where the estimate sits at exactly 0 — most draws simply never land anywhere near ${RARE_INTERVAL_LABEL}, so the estimator barely moves. This is naive Monte Carlo's weak spot: for a rare event, almost every sample is "wasted," and the estimator has huge *relative* variance until $n$ gets enormous.
+Click **Simulate** and **Simulate ×100** repeatedly. You'll likely see long stretches where the estimate sits at exactly 0: most draws simply never land anywhere near ${RARE_INTERVAL_LABEL}, so the estimator barely moves. This is naive Monte Carlo's weak spot: for a rare event, almost every sample is "wasted," and the estimator has huge variance until $n$ gets enormous.
       `}</Markdown>
       <MonteCarloWidget
         sampler={sampleStandardNormal}
